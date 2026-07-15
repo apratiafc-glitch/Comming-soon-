@@ -4,35 +4,64 @@
     <div class="absolute top-0 left-1/4 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none"></div>
     <div class="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-corporate-gold/5 rounded-full blur-[150px] pointer-events-none"></div>
 
-    <!-- Floating Branding Elements (Fruit Characters with low opacity for immersive layered look) -->
+    <!-- Floating Branding Elements (Fruit Characters & Brand Logos with low opacity for immersive layered look) -->
     <div class="absolute inset-0 pointer-events-none overflow-hidden z-0">
       <!-- Orange Character Top Left -->
       <img
         src="/images/Orange Charactor.png" 
         alt="" 
-        class="absolute top-20 left-10 md:left-24 w-28 md:w-40 object-contain opacity-25 animate-float"
+        class="absolute top-20 left-10 md:left-24 w-28 md:w-40 object-contain opacity-15 animate-float"
         style="animation-duration: 7s;"
       />
       <!-- Plum Character Bottom Left -->
       <img 
         src="/images/Plum CHARACTER.png" 
         alt="" 
-        class="absolute bottom-20 left-6 md:left-20 w-24 md:w-36 object-contain opacity-20 animate-float"
+        class="absolute bottom-20 left-6 md:left-20 w-24 md:w-36 object-contain opacity-10 animate-float"
         style="animation-duration: 9s; animation-delay: 1s;"
       />
       <!-- Tamarind Character Top Right -->
       <img 
         src="/images/Tamarin Character.png" 
         alt="" 
-        class="absolute top-32 right-8 md:right-28 w-28 md:w-38 object-contain opacity-20 animate-float"
+        class="absolute top-32 right-8 md:right-28 w-28 md:w-38 object-contain opacity-10 animate-float"
         style="animation-duration: 8s; animation-delay: 2s;"
       />
       <!-- Grape Character Bottom Right -->
       <img 
         src="/images/Grape Character.png" 
         alt="" 
-        class="absolute bottom-24 right-10 md:right-24 w-24 md:w-36 object-contain opacity-25 animate-float"
+        class="absolute bottom-24 right-10 md:right-24 w-24 md:w-36 object-contain opacity-15 animate-float"
         style="animation-duration: 10s; animation-delay: 3s;"
+      />
+
+      <!-- Brand Logo 1 (Sevati) Middle Left -->
+      <img 
+        src="/images/brand_1.png" 
+        alt="Sevati Brand" 
+        class="absolute top-[40%] left-4 md:left-12 w-28 md:w-36 object-contain opacity-25 animate-float"
+        style="animation-duration: 11s; animation-delay: 1.5s;"
+      />
+      <!-- Brand Logo 2 (Frutati) Top Right-ish -->
+      <img 
+        src="/images/brand_2.png" 
+        alt="Frutati Brand" 
+        class="absolute top-[15%] right-20 md:right-48 w-28 md:w-36 object-contain opacity-25 animate-float"
+        style="animation-duration: 12s; animation-delay: 0.5s;"
+      />
+      <!-- Brand Logo 3 (Mocati) Middle Right -->
+      <img 
+        src="/images/brand_3.png" 
+        alt="Mocati Brand" 
+        class="absolute top-[55%] right-6 md:right-16 w-32 md:w-44 object-contain opacity-25 animate-float"
+        style="animation-duration: 13s; animation-delay: 2.5s;"
+      />
+      <!-- Brand Logo 4 (Aprati) Bottom Left-ish -->
+      <img 
+        src="/images/brand_4.png" 
+        alt="Aprati Brand" 
+        class="absolute bottom-32 left-12 md:left-36 w-36 md:w-48 object-contain opacity-25 animate-float"
+        style="animation-duration: 14s; animation-delay: 3.5s;"
       />
     </div>
 
