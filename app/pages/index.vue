@@ -7,7 +7,7 @@
     <!-- Floating Branding Elements (Fruit Characters with low opacity for immersive layered look) -->
     <div class="absolute inset-0 pointer-events-none overflow-hidden z-0">
       <!-- Orange Character Top Left -->
-      <img 
+      <img
         src="/images/Orange Charactor.png" 
         alt="" 
         class="absolute top-20 left-10 md:left-24 w-28 md:w-40 object-contain opacity-25 animate-float"
@@ -40,12 +40,12 @@
     <header class="relative z-10 w-full max-w-7xl mx-auto px-6 py-6 flex items-center justify-between border-b border-white/5 backdrop-blur-sm">
       <div class="flex items-center space-x-3">
         <img 
-          src="/images/Company Logo-01.png" 
+          src="/images/logo.png" 
           alt="Aprati Foods Cambodia" 
           class="h-12 w-auto object-contain brightness-100 filter drop-shadow-[0_0_15px_rgba(255,255,255,0.15)]"
         />
         <span class="hidden sm:inline-block font-black text-sm tracking-[0.2em] uppercase text-white">
-          Aprati Foods
+          Aprati Foods (Cambodia) Ltd.
         </span>
       </div>
       
@@ -68,7 +68,8 @@
         <div class="inline-flex items-center space-x-3 animate-slide-down">
           <div class="w-8 h-[1px] bg-corporate-gold"></div>
           <span class="text-xs font-black tracking-[0.3em] uppercase text-corporate-gold">
-            Aprati Foods Cambodia
+           Aprati Foods (Cambodia) Ltd.
+
           </span>
           <div class="w-8 h-[1px] bg-corporate-gold"></div>
         </div>
@@ -160,7 +161,7 @@
         </a>
         <span class="flex items-center gap-1.5">
           <PhoneIcon class="w-4 h-4" />
-          <span>+855 (0) 23 999 888</span>
+          <span>+855 87 300 040</span>
         </span>
       </div>
     </footer>
