@@ -237,19 +237,28 @@ import {
   ExclamationTriangleIcon, XMarkIcon
 } from '@heroicons/vue/24/outline'
 
+import { getStoredJobs } from '~/utils/jobsStorage'
+
 useSeoMeta({
   title: 'Careers — Aprati Foods (Cambodia) Ltd.',
   description: 'Join the Aprati Foods team. Browse open job positions and career opportunities in Cambodia.'
 })
 
-const { data: jobs, pending, error } = await useFetch('/api/jobs', { key: 'careers-jobs', server: true })
+const { data: apiJobs, pending, error } = await useFetch('/api/jobs', { key: 'careers-jobs', server: true })
 
+const jobs = ref([])
 const selectedJob = ref(null)
 const isMobile = ref(false)
 
 onMounted(() => {
   isMobile.value = window.innerWidth < 640
   window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeDetail() })
+
+  if (apiJobs.value && Array.isArray(apiJobs.value) && apiJobs.value.length > 0) {
+    jobs.value = apiJobs.value
+  } else {
+    jobs.value = getStoredJobs()
+  }
 })
 
 function openDetail(job) {

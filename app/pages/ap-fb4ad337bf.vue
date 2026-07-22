@@ -400,6 +400,12 @@ import {
   PencilSquareIcon, CheckIcon, XMarkIcon
 } from '@heroicons/vue/24/outline'
 
+import {
+  getStoredJobs, saveStoredJobs, addStoredJob,
+  updateStoredJob, deleteStoredJob, checkStoredAuth,
+  setStoredAuth, verifyHrPasswordLocal
+} from '~/utils/jobsStorage'
+
 useSeoMeta({ title: 'HR Admin — Aprati Foods', robots: 'noindex,nofollow' })
 
 // ── Auth State ────────────────────────────────────────────────────────────────
@@ -418,9 +424,12 @@ onMounted(async () => {
   try {
     await $fetch('/api/jobs/session')
     authenticated.value = true
-    loadJobs()
+    await loadJobs()
   } catch {
-    // No valid session — show login form
+    if (checkStoredAuth()) {
+      authenticated.value = true
+      await loadJobs()
+    }
   }
 })
 
@@ -437,20 +446,29 @@ async function authenticate() {
       credentials: 'include'
     })
     authenticated.value = true
+    setStoredAuth(true)
     passwordInput.value = ''
     await loadJobs()
   } catch (err) {
     const status = err?.status || err?.statusCode
     const msg = err?.data?.statusMessage || err?.statusMessage || 'Authentication failed'
 
-    if (status === 429) {
-      // Locked out — parse lockout time and start countdown
+    // If static hosting (404 on API), fallback to local verification
+    if (status === 404 || !status) {
+      if (verifyHrPasswordLocal(passwordInput.value)) {
+        authenticated.value = true
+        setStoredAuth(true)
+        passwordInput.value = ''
+        await loadJobs()
+      } else {
+        authError.value = 'Incorrect password.'
+      }
+    } else if (status === 429) {
       isLockedOut.value = true
       startLockoutCountdown(msg)
       authError.value = msg
     } else {
       authError.value = msg
-      // Extract attempts warning if present
       if (msg.includes('attempt')) {
         attemptsWarning.value = msg
         authError.value = 'Incorrect password.'
@@ -462,7 +480,6 @@ async function authenticate() {
 }
 
 function startLockoutCountdown(msg) {
-  // Parse minutes from message
   const match = msg.match(/(\d+) minute/)
   const minutes = match ? parseInt(match[1]) : 15
   let seconds = minutes * 60
@@ -489,6 +506,7 @@ async function logout() {
   try {
     await $fetch('/api/jobs/logout', { method: 'POST', credentials: 'include' })
   } catch {}
+  setStoredAuth(false)
   authenticated.value = false
   jobs.value = []
 }
@@ -500,11 +518,15 @@ const listLoading = ref(false)
 async function loadJobs() {
   listLoading.value = true
   try {
-    jobs.value = await $fetch('/api/jobs', { credentials: 'include' })
-  } catch (err) {
-    if (err?.status === 401 || err?.statusCode === 401) {
-      authenticated.value = false
+    const data = await $fetch('/api/jobs', { credentials: 'include' })
+    if (Array.isArray(data)) {
+      jobs.value = data
+      saveStoredJobs(data)
+    } else {
+      jobs.value = getStoredJobs()
     }
+  } catch {
+    jobs.value = getStoredJobs()
   } finally {
     listLoading.value = false
   }
@@ -535,13 +557,19 @@ async function postJob() {
     await loadJobs()
     setTimeout(() => { postSuccess.value = false }, 4000)
   } catch (err) {
-    if (err?.status === 401) {
+    if (err?.status === 404 || !err?.status) {
+      addStoredJob({ ...form.value })
+      postSuccess.value = true
+      form.value = { title: '', department: '', location: 'Phnom Penh, Cambodia', type: 'Full-time', description: '', requirements: '', deadline: '' }
+      await loadJobs()
+      setTimeout(() => { postSuccess.value = false }, 4000)
+    } else if (err?.status === 401) {
       authenticated.value = false
       postError.value = 'Session expired. Please log in again.'
     } else {
       postError.value = err?.data?.statusMessage || 'Failed to post job.'
+      setTimeout(() => { postError.value = '' }, 4000)
     }
-    setTimeout(() => { postError.value = '' }, 4000)
   } finally {
     postLoading.value = false
   }
@@ -560,7 +588,13 @@ async function deleteJob(id) {
     deleteTarget.value = null
     await loadJobs()
   } catch (err) {
-    if (err?.status === 401) authenticated.value = false
+    if (err?.status === 404 || !err?.status) {
+      deleteStoredJob(id)
+      deleteTarget.value = null
+      await loadJobs()
+    } else if (err?.status === 401) {
+      authenticated.value = false
+    }
   } finally {
     deleteLoading.value = false
   }
@@ -602,7 +636,11 @@ async function saveEdit() {
     editTarget.value = null
     await loadJobs()
   } catch (err) {
-    if (err?.status === 401) {
+    if (err?.status === 404 || !err?.status) {
+      updateStoredJob(editTarget.value.id, { ...editForm.value })
+      editTarget.value = null
+      await loadJobs()
+    } else if (err?.status === 401) {
       authenticated.value = false
     } else {
       editError.value = err?.data?.statusMessage || 'Failed to update job.'
