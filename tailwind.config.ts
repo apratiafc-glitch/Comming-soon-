@@ -16,25 +16,60 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: {
-          50: '#eff6ff',
+        // ── Page Backgrounds ───────────────────────────────────
+        dark:        '#070c18',   // Deep navy page bg
+        'dark-card': '#0c1322',   // Card surface
+        'dark-lift': '#111b30',   // Elevated card / hover
+
+        // ── Aprati Foods Company Brand (BLUE) ──────────────────
+        brand: {
+          50:  '#eff6ff',
           100: '#dbeafe',
           200: '#bfdbfe',
-          300: '#93c5fd',
-          400: '#60a5fa',
-          500: '#3b82f6',
-          600: '#2563eb',
-          700: '#1d4ed8',
-          800: '#1e40af',
-          900: '#1e3a8a'
+          300: '#7ab4fa',
+          400: '#3b8ef8',
+          500: '#1a6ff5',   // Primary brand blue
+          600: '#1558d6',
+          700: '#1044b0',
+          800: '#0d3490',
+          900: '#0a2575',
         },
+
+        // ── Sub-brand: Green ────────────────────────────────────
+        'sb-green': {
+          400: '#34d399',
+          500: '#10b981',
+          600: '#059669',
+          900: '#064e3b',
+        },
+
+        // ── Sub-brand: Red ──────────────────────────────────────
+        'sb-red': {
+          400: '#f87171',
+          500: '#ef4444',
+          600: '#dc2626',
+          900: '#450a0a',
+        },
+
+        // ── Sub-brand: Orange ───────────────────────────────────
+        'sb-orange': {
+          400: '#fb923c',
+          500: '#f97316',
+          600: '#ea6c0c',
+          900: '#431407',
+        },
+
+        // ── Gold accent (premium / CTA) ─────────────────────────
+        gold: {
+          400: '#fbbf24',
+          500: '#f59e0b',
+          600: '#d97706',
+        },
+
+        // ── Keep for backward compat ────────────────────────────
         corporate: {
-          dark: '#0022ffff',      // Midnight Navy / Royal Blue
-          gold: '#dd9207ff',      // Silk Gold
-          emerald: '#065f46',     // Deep Emerald
-          slate: '#0018f2ff',     // Slate Gray
-          light: '#f8fafc'        // Off-White
-        }
+          gold: '#dd9207ff',
+        },
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],

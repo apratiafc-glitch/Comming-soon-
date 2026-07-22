@@ -5,9 +5,23 @@
 @layer base {
   html {
     font-family: 'Inter', system-ui, sans-serif;
+    scroll-behavior: smooth;
+    background: #070c18;
   }
 
   body {
-    @apply bg-slate-50 text-slate-900 antialiased font-sans;
+    background: #070c18;
+    color: white;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 999px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(26,111,245,0.4); }
+
+  /* Selection */
+  ::selection { background: #1a6ff5; color: white; }
 }

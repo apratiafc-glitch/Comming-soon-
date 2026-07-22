@@ -1,5 +1,12 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  // Runtime config — server-side secrets read from .env
+  runtimeConfig: {
+    hrPasswordHash: process.env.HR_PASSWORD_HASH || '$2b$12$zy90hILEip9BVblNO8H0zuBAzH.wZpgqANwZcNkZQsSEzwImO.UvK',
+  },
+
+
+
   compatibilityDate: '2025-07-15',
   devtools: { enabled: false },
 

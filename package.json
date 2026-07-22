@@ -16,8 +16,15 @@
     "@tailwindcss/forms": "^0.5.11",
     "@tailwindcss/typography": "^0.5.20",
     "@vueuse/nuxt": "^14.3.0",
+    "bcryptjs": "^3.0.3",
     "nuxt": "^4.4.8",
+    "sql.js": "^1.14.1",
     "vue": "^3.5.39",
     "vue-router": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/sql.js": "^1.4.11"
   }
 }
