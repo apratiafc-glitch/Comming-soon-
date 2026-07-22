@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   // Runtime config — server-side secrets read from .env
   runtimeConfig: {
-    hrPasswordHash: process.env.HR_PASSWORD_HASH || '$2b$12$zy90hILEip9BVblNO8H0zuBAzH.wZpgqANwZcNkZQsSEzwImO.UvK',
+    hrPasswordHash: process.env.HR_PASSWORD_HASH || '$2b$12$MavYJlD8/SGSgVpeFtjeXObqroZaxzbXH7DGEr5EtoGCAKYcdJmcy',
   },
 
 
