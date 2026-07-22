@@ -403,7 +403,7 @@ import {
 import {
   getStoredJobs, saveStoredJobs, addStoredJob,
   updateStoredJob, deleteStoredJob, checkStoredAuth,
-  setStoredAuth, verifyHrPasswordLocal
+  setStoredAuth, verifyHrPasswordLocal, isStaticHost
 } from '~/utils/jobsStorage'
 
 useSeoMeta({ title: 'HR Admin — Aprati Foods', robots: 'noindex,nofollow' })
@@ -421,6 +421,13 @@ let lockoutTimer = null
 
 // Check existing session on page load
 onMounted(async () => {
+  if (isStaticHost()) {
+    if (checkStoredAuth()) {
+      authenticated.value = true
+      await loadJobs()
+    }
+    return
+  }
   try {
     await $fetch('/api/jobs/session')
     authenticated.value = true
@@ -438,6 +445,19 @@ async function authenticate() {
   authLoading.value = true
   authError.value = ''
   attemptsWarning.value = ''
+
+  if (isStaticHost()) {
+    if (verifyHrPasswordLocal(passwordInput.value)) {
+      authenticated.value = true
+      setStoredAuth(true)
+      passwordInput.value = ''
+      await loadJobs()
+    } else {
+      authError.value = 'Incorrect password.'
+    }
+    authLoading.value = false
+    return
+  }
 
   try {
     await $fetch('/api/jobs/validate', {
@@ -458,7 +478,6 @@ async function authenticate() {
       startLockoutCountdown(msg)
       authError.value = msg
     } else {
-      // Fallback for static hosting (404, 405, or client side)
       if (verifyHrPasswordLocal(passwordInput.value)) {
         authenticated.value = true
         setStoredAuth(true)
@@ -497,9 +516,11 @@ function startLockoutCountdown(msg) {
 }
 
 async function logout() {
-  try {
-    await $fetch('/api/jobs/logout', { method: 'POST', credentials: 'include' })
-  } catch {}
+  if (!isStaticHost()) {
+    try {
+      await $fetch('/api/jobs/logout', { method: 'POST', credentials: 'include' })
+    } catch {}
+  }
   setStoredAuth(false)
   authenticated.value = false
   jobs.value = []
@@ -511,6 +532,11 @@ const listLoading = ref(false)
 
 async function loadJobs() {
   listLoading.value = true
+  if (isStaticHost()) {
+    jobs.value = getStoredJobs()
+    listLoading.value = false
+    return
+  }
   try {
     const data = await $fetch('/api/jobs', { credentials: 'include' })
     if (Array.isArray(data)) {
@@ -540,6 +566,16 @@ async function postJob() {
   postSuccess.value = false
   postError.value = ''
 
+  if (isStaticHost()) {
+    addStoredJob({ ...form.value })
+    postSuccess.value = true
+    form.value = { title: '', department: '', location: 'Phnom Penh, Cambodia', type: 'Full-time', description: '', requirements: '', deadline: '' }
+    await loadJobs()
+    setTimeout(() => { postSuccess.value = false }, 4000)
+    postLoading.value = false
+    return
+  }
+
   try {
     await $fetch('/api/jobs', {
       method: 'POST',
@@ -556,7 +592,6 @@ async function postJob() {
       authenticated.value = false
       postError.value = 'Session expired. Please log in again.'
     } else {
-      // Local fallback for static hosting
       addStoredJob({ ...form.value })
       postSuccess.value = true
       form.value = { title: '', department: '', location: 'Phnom Penh, Cambodia', type: 'Full-time', description: '', requirements: '', deadline: '' }
@@ -576,6 +611,13 @@ function confirmDelete(job) { deleteTarget.value = job }
 
 async function deleteJob(id) {
   deleteLoading.value = true
+  if (isStaticHost()) {
+    deleteStoredJob(id)
+    deleteTarget.value = null
+    await loadJobs()
+    deleteLoading.value = false
+    return
+  }
   try {
     await $fetch(`/api/jobs/${id}`, { method: 'DELETE', credentials: 'include' })
     deleteTarget.value = null
@@ -585,7 +627,6 @@ async function deleteJob(id) {
     if (status === 401) {
       authenticated.value = false
     } else {
-      // Local fallback for static hosting (handles 404, 405 Method Not Allowed, etc.)
       deleteStoredJob(id)
       deleteTarget.value = null
       await loadJobs()
@@ -622,6 +663,13 @@ async function saveEdit() {
   if (!editTarget.value) return
   editLoading.value = true
   editError.value = ''
+  if (isStaticHost()) {
+    updateStoredJob(editTarget.value.id, { ...editForm.value })
+    editTarget.value = null
+    await loadJobs()
+    editLoading.value = false
+    return
+  }
   try {
     await $fetch(`/api/jobs/${editTarget.value.id}`, {
       method: 'PUT',
@@ -635,7 +683,6 @@ async function saveEdit() {
     if (status === 401) {
       authenticated.value = false
     } else {
-      // Local fallback for static hosting
       updateStoredJob(editTarget.value.id, { ...editForm.value })
       editTarget.value = null
       await loadJobs()

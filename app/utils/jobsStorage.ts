@@ -128,3 +128,8 @@ export function verifyHrPasswordLocal(inputPass: string): boolean {
     return false
   }
 }
+
+export function isStaticHost(): boolean {
+  if (typeof window === 'undefined') return false
+  return !window.location.hostname.includes('localhost') && window.location.hostname !== '127.0.0.1'
+}
