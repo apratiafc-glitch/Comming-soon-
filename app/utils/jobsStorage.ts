@@ -62,6 +62,7 @@ export function getStoredJobs(): Job[] {
 export function saveStoredJobs(jobs: Job[]) {
   if (typeof window === 'undefined') return
   localStorage.setItem(STORAGE_KEY, JSON.stringify(jobs))
+  try { window.dispatchEvent(new Event('aprati_jobs_updated')) } catch {}
 }
 
 export function addStoredJob(jobData: Omit<Job, 'id' | 'is_active' | 'created_at'>): Job {

@@ -237,7 +237,7 @@ import {
   ExclamationTriangleIcon, XMarkIcon
 } from '@heroicons/vue/24/outline'
 
-import { getStoredJobs } from '~/utils/jobsStorage'
+import { getStoredJobs, isStaticHost } from '~/utils/jobsStorage'
 
 useSeoMeta({
   title: 'Careers — Aprati Foods (Cambodia) Ltd.',
@@ -250,15 +250,24 @@ const jobs = ref([])
 const selectedJob = ref(null)
 const isMobile = ref(false)
 
-onMounted(() => {
-  isMobile.value = window.innerWidth < 640
-  window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeDetail() })
-
-  if (apiJobs.value && Array.isArray(apiJobs.value) && apiJobs.value.length > 0) {
+function syncJobs() {
+  if (isStaticHost()) {
+    jobs.value = getStoredJobs()
+  } else if (apiJobs.value && Array.isArray(apiJobs.value) && apiJobs.value.length > 0) {
     jobs.value = apiJobs.value
   } else {
     jobs.value = getStoredJobs()
   }
+}
+
+onMounted(() => {
+  isMobile.value = window.innerWidth < 640
+  window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeDetail() })
+
+  syncJobs()
+
+  window.addEventListener('storage', syncJobs)
+  window.addEventListener('aprati_jobs_updated', syncJobs)
 })
 
 function openDetail(job) {
