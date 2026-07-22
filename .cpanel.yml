@@ -1,6 +1,6 @@
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/apratifoodscom/public_html/apratifoods.asia/
+    - export DEPLOYPATH=/home/apratifoodscom/public_html/
     - /bin/mkdir -p $DEPLOYPATH
     # Copy Frontend (Nuxt static files, includes dotfiles like .htaccess)
     - /bin/cp -rf .output/public/. $DEPLOYPATH/
