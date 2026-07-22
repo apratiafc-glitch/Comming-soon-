@@ -450,27 +450,21 @@ async function authenticate() {
     passwordInput.value = ''
     await loadJobs()
   } catch (err) {
-    const status = err?.status || err?.statusCode
+    const status = err?.status || err?.statusCode || 0
     const msg = err?.data?.statusMessage || err?.statusMessage || 'Authentication failed'
 
-    // If static hosting (404 on API), fallback to local verification
-    if (status === 404 || !status) {
+    if (status === 429) {
+      isLockedOut.value = true
+      startLockoutCountdown(msg)
+      authError.value = msg
+    } else {
+      // Fallback for static hosting (404, 405, or client side)
       if (verifyHrPasswordLocal(passwordInput.value)) {
         authenticated.value = true
         setStoredAuth(true)
         passwordInput.value = ''
         await loadJobs()
       } else {
-        authError.value = 'Incorrect password.'
-      }
-    } else if (status === 429) {
-      isLockedOut.value = true
-      startLockoutCountdown(msg)
-      authError.value = msg
-    } else {
-      authError.value = msg
-      if (msg.includes('attempt')) {
-        attemptsWarning.value = msg
         authError.value = 'Incorrect password.'
       }
     }
@@ -557,18 +551,17 @@ async function postJob() {
     await loadJobs()
     setTimeout(() => { postSuccess.value = false }, 4000)
   } catch (err) {
-    if (err?.status === 404 || !err?.status) {
+    const status = err?.status || err?.statusCode || 0
+    if (status === 401) {
+      authenticated.value = false
+      postError.value = 'Session expired. Please log in again.'
+    } else {
+      // Local fallback for static hosting
       addStoredJob({ ...form.value })
       postSuccess.value = true
       form.value = { title: '', department: '', location: 'Phnom Penh, Cambodia', type: 'Full-time', description: '', requirements: '', deadline: '' }
       await loadJobs()
       setTimeout(() => { postSuccess.value = false }, 4000)
-    } else if (err?.status === 401) {
-      authenticated.value = false
-      postError.value = 'Session expired. Please log in again.'
-    } else {
-      postError.value = err?.data?.statusMessage || 'Failed to post job.'
-      setTimeout(() => { postError.value = '' }, 4000)
     }
   } finally {
     postLoading.value = false
@@ -588,12 +581,14 @@ async function deleteJob(id) {
     deleteTarget.value = null
     await loadJobs()
   } catch (err) {
-    if (err?.status === 404 || !err?.status) {
+    const status = err?.status || err?.statusCode || 0
+    if (status === 401) {
+      authenticated.value = false
+    } else {
+      // Local fallback for static hosting (handles 404, 405 Method Not Allowed, etc.)
       deleteStoredJob(id)
       deleteTarget.value = null
       await loadJobs()
-    } else if (err?.status === 401) {
-      authenticated.value = false
     }
   } finally {
     deleteLoading.value = false
@@ -636,14 +631,14 @@ async function saveEdit() {
     editTarget.value = null
     await loadJobs()
   } catch (err) {
-    if (err?.status === 404 || !err?.status) {
+    const status = err?.status || err?.statusCode || 0
+    if (status === 401) {
+      authenticated.value = false
+    } else {
+      // Local fallback for static hosting
       updateStoredJob(editTarget.value.id, { ...editForm.value })
       editTarget.value = null
       await loadJobs()
-    } else if (err?.status === 401) {
-      authenticated.value = false
-    } else {
-      editError.value = err?.data?.statusMessage || 'Failed to update job.'
     }
   } finally {
     editLoading.value = false
