@@ -1,0 +1,1 @@
+.animate-float[data-v-cf111e9a]{animation:float-cf111e9a ease-in-out infinite}@keyframes float-cf111e9a{0%,to{transform:translateY(0) rotate(0)}50%{transform:translateY(-14px) rotate(1.5deg)}}.animate-spin[data-v-cf111e9a]{animation:spin-cf111e9a 1s linear infinite}@keyframes spin-cf111e9a{0%{transform:rotate(0)}to{transform:rotate(1turn)}}
