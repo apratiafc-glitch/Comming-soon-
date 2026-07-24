@@ -79,6 +79,18 @@ const INITIAL_JOBS: Job[] = [
     created_at: new Date().toISOString()
   },
   {
+    id: 6,
+    title: 'Modern Trade Sales Manager',
+    department: 'Modern Trade',
+    location: 'Phnom Penh, Cambodia',
+    type: 'Full-time',
+    description: 'Modern Trade Account Management:\n• Build and maintain strong relationships with key modern trade customers and buyers.\n• Plan and implement sales and promotional activities to achieve business objectives.\n• Negotiate shelf space, displays, and promotional support with store chains.\n• Monitor and improve in-store product visibility and availability.\n\nSales & Performance Management:\n• Achieve monthly and quarterly sales targets by store and by product category.\n• Monitor and analyze sales data, stock levels, and sell-out performance.\n• Identify sales growth opportunities and recommend actions for improvement.\n\nTeam Supervision:\n• Lead, coach, and monitor a team of sales reps or merchandisers.\n• Plan daily store visits and route plans for team members.\n• Conduct regular in-store training and performance evaluations.\n\nExecution & Merchandising:\n• Ensure excellent execution of planograms, displays, and promotions.\n• Coordinate with marketing and logistics to ensure timely delivery of POS materials and stocks.\n• Prevent out-of-stock situations and ensure stock rotation (FIFO).\n\nMarket Intelligence & Reporting:\n• Monitor competitor activities, promotions, and pricing within modern trade.\n• Share timely insights with internal sales and marketing teams.\n• Track KPIs such as active store, sales vs. target, availability, and coverage.',
+    requirements: '• Bachelor’s degree in Business, Sales, Marketing, or a related field.\n• 2+ years of experience in sales coordination or account management, preferably in FMCG.\n• Proven experience managing modern trade channels such as supermarkets, hypermarkets, and key accounts.\n• Familiarity with modern trade and pharmacy sales channels.\n• Strong communication and negotiation skills.\n• Proficiency in MS Office (Excel, Word, PowerPoint).\n• Ability to analyze sales data and develop actionable insights.\n• Ability to work under pressure and meet tight deadlines.',
+    deadline: '2026-09-30',
+    is_active: 1,
+    created_at: new Date().toISOString()
+  },
+  {
     id: 7,
     title: 'ផ្នែកលក់ខាងក្រៅ (Outdoor Sales Representative)',
     department: 'Field Sales',
@@ -169,9 +181,7 @@ export function getStoredJobs(): Job[] {
       j.title !== 'Sales Executive' && 
       j.title !== 'Warehouse & Logistics Officer' &&
       j.title !== 'testing' &&
-      j.title !== 'Sales Order Executive' &&
-      j.title !== 'Modern Trade Sales Manager' &&
-      j.title !== 'Modern Trade Manager'
+      j.title !== 'Sales Order Executive'
     )
 
     // Ensure any new default jobs in INITIAL_JOBS are merged if missing

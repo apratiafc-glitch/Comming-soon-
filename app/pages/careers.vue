@@ -386,9 +386,7 @@ function syncJobs() {
     j.title !== 'Sales Executive' && 
     j.title !== 'Warehouse & Logistics Officer' && 
     j.title !== 'testing' &&
-    j.title !== 'Sales Order Executive' &&
-    j.title !== 'Modern Trade Sales Manager' &&
-    j.title !== 'Modern Trade Manager'
+    j.title !== 'Sales Order Executive'
   )
 
   if (filtered.length === 0) {
