@@ -32,7 +32,7 @@ const INITIAL_JOBS: Job[] = [
   },
   {
     id: 2,
-    title: 'Sales Order Executive',
+    title: 'Sales Order Management Executive',
     department: 'Supply Chain',
     location: 'Phnom Penh, Cambodia',
     type: 'Full-time',
@@ -74,18 +74,6 @@ const INITIAL_JOBS: Job[] = [
     type: 'Full-time',
     description: 'Sales Planning and Strategy:\n• Develop and implement sales plans to achieve company goals within the assigned area.\n• Monitor market dynamics, competitor activities, and customer needs to identify new opportunities.\n• Prepare accurate sales forecasts and ensure efficient territory coverage.\n\nTeam Leadership and Development:\n• Lead, train, and guide the sales team to meet individual and team targets.\n• Monitor team performance and provide regular feedback and coaching.\n• Support professional development to enhance the team’s selling and negotiation skills.\n\nCustomer Relationship Management:\n• Build and maintain strong partnerships with key customers, distributors, and retailers.\n• Negotiate contracts, pricing, and promotional activities to maximize business growth.\n• Ensure excellent customer service and resolve any issues promptly.\n\nSales Execution and Operations:\n• Supervise daily sales activities and ensure the proper implementation of trade marketing programs.\n• Ensure product visibility, stock availability, and proper merchandising across outlets.\n• Collaborate with other departments to ensure smooth coordination and execution of sales plans.\n\nReporting and Analysis:\n• Review sales reports and analyze performance against targets.\n• Identify gaps or potential areas for improvement and recommend action plans.\n• Manage area budgets effectively and ensure compliance with company standards.',
     requirements: '• Bachelor’s degree in Business, Marketing, or a related discipline.\n• At least 3 to 5 years of experience in a sales leadership role, preferably in FMCG, retail, or distribution.\n• Proven ability to achieve and exceed sales goals.\n• Strong leadership, communication, and negotiation skills.\n• Proficient in Microsoft Office, especially Excel and PowerPoint.\n• Willingness to travel frequently and work under pressure.',
-    deadline: '2026-09-30',
-    is_active: 1,
-    created_at: new Date().toISOString()
-  },
-  {
-    id: 6,
-    title: 'Modern Trade Sales Manager',
-    department: 'Modern Trade',
-    location: 'Phnom Penh, Cambodia',
-    type: 'Full-time',
-    description: 'Modern Trade Account Management:\n• Build and maintain strong relationships with key modern trade customers and buyers.\n• Plan and implement sales and promotional activities to achieve business objectives.\n• Negotiate shelf space, displays, and promotional support with store chains.\n• Monitor and improve in-store product visibility and availability.\n\nSales & Performance Management:\n• Achieve monthly and quarterly sales targets by store and by product category.\n• Monitor and analyze sales data, stock levels, and sell-out performance.\n• Identify sales growth opportunities and recommend actions for improvement.\n\nTeam Supervision:\n• Lead, coach, and monitor a team of sales reps or merchandisers.\n• Plan daily store visits and route plans for team members.\n• Conduct regular in-store training and performance evaluations.\n\nExecution & Merchandising:\n• Ensure excellent execution of planograms, displays, and promotions.\n• Coordinate with marketing and logistics to ensure timely delivery of POS materials and stocks.\n• Prevent out-of-stock situations and ensure stock rotation (FIFO).\n\nMarket Intelligence & Reporting:\n• Monitor competitor activities, promotions, and pricing within modern trade.\n• Share timely insights with internal sales and marketing teams.\n• Track KPIs such as active store, sales vs. target, availability, and coverage.',
-    requirements: '• Bachelor’s degree in Business, Sales, Marketing, or a related field.\n• 2+ years of experience in sales coordination or account management, preferably in FMCG.\n• Proven experience managing modern trade channels such as supermarkets, hypermarkets, and key accounts.\n• Familiarity with modern trade and pharmacy sales channels.\n• Strong communication and negotiation skills.\n• Proficiency in MS Office (Excel, Word, PowerPoint).\n• Ability to analyze sales data and develop actionable insights.\n• Ability to work under pressure and meet tight deadlines.',
     deadline: '2026-09-30',
     is_active: 1,
     created_at: new Date().toISOString()
@@ -180,7 +168,10 @@ export function getStoredJobs(): Job[] {
       j.is_active !== 0 && 
       j.title !== 'Sales Executive' && 
       j.title !== 'Warehouse & Logistics Officer' &&
-      j.title !== 'testing'
+      j.title !== 'testing' &&
+      j.title !== 'Sales Order Executive' &&
+      j.title !== 'Modern Trade Sales Manager' &&
+      j.title !== 'Modern Trade Manager'
     )
 
     // Ensure any new default jobs in INITIAL_JOBS are merged if missing
