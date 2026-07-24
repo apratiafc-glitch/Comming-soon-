@@ -141,11 +141,45 @@
       </Transition>
 
       <!-- Contact strip -->
-      <div v-if="jobs && jobs.length > 0" class="mt-16 text-center">
-        <div class="inline-flex items-center gap-2 bg-white px-6 py-3.5 rounded-2xl border border-slate-200/80 shadow-sm text-sm text-slate-600 font-medium">
-          <EnvelopeIcon class="w-4 h-4 text-blue-600" />
-          <span>Don't see the right role? Email us at</span>
-          <a href="mailto:recruitment@apratifoods.asia" class="text-blue-600 font-bold hover:underline">recruitment@apratifoods.asia</a>
+      <div class="mt-12 text-center max-w-5xl mx-auto">
+        <div class="bg-white p-5 sm:p-6 rounded-3xl border border-slate-200/90 shadow-sm flex flex-col lg:flex-row items-center justify-center gap-4 lg:gap-6 text-sm text-slate-600 font-medium">
+          <!-- Email -->
+          <div class="flex items-center gap-2 flex-wrap justify-center">
+            <EnvelopeIcon class="w-5 h-5 text-blue-600 flex-shrink-0" style="width: 20px; height: 20px;" />
+            <span>Don't see the right role? Email us at</span>
+            <a href="mailto:recruitment@apratifoods.asia" class="text-blue-600 font-bold hover:underline">recruitment@apratifoods.asia</a>
+          </div>
+
+          <!-- Separator -->
+          <span class="hidden lg:inline text-slate-300 font-light">•</span>
+
+          <!-- Facebook Link -->
+          <div class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-[#1877F2] flex-shrink-0" style="width: 20px; height: 20px;" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+            <span>Facebook:</span>
+            <a href="https://www.facebook.com/apratifoodscompany" target="_blank" rel="noopener noreferrer" class="text-blue-600 font-bold hover:underline inline-flex items-center gap-1">
+              Aprati Foods Company
+              <ArrowUpRightIcon class="w-3.5 h-3.5 text-blue-500" style="width: 14px; height: 14px;" />
+            </a>
+          </div>
+
+          <!-- Separator -->
+          <span class="hidden lg:inline text-slate-300 font-light">•</span>
+
+          <!-- Recruitment Team -->
+          <div class="flex items-center gap-2 flex-wrap justify-center">
+            <PhoneIcon class="w-5 h-5 text-emerald-600 flex-shrink-0" style="width: 20px; height: 20px;" />
+            <span>Recruitment Team:</span>
+            <div class="inline-flex flex-wrap items-center gap-1.5 text-slate-800 font-bold">
+              <a href="tel:078585887" class="hover:text-blue-600 transition-colors whitespace-nowrap">078 585 887</a>
+              <span class="text-slate-300 font-normal">/</span>
+              <a href="tel:0967583532" class="hover:text-blue-600 transition-colors whitespace-nowrap">096 7 583 532</a>
+              <span class="text-slate-300 font-normal">/</span>
+              <a href="tel:081410197" class="hover:text-blue-600 transition-colors whitespace-nowrap">081 410 197</a>
+            </div>
+          </div>
         </div>
       </div>
     </main>
@@ -319,7 +353,7 @@
 import {
   ArrowLeftIcon, ArrowUpRightIcon, BriefcaseIcon, BuildingOfficeIcon,
   MapPinIcon, CalendarDaysIcon, ClockIcon, EnvelopeIcon,
-  ExclamationTriangleIcon, XMarkIcon, ShareIcon, LinkIcon, CheckIcon
+  ExclamationTriangleIcon, XMarkIcon, ShareIcon, LinkIcon, CheckIcon, PhoneIcon
 } from '@heroicons/vue/24/outline'
 
 import { getStoredJobs, isStaticHost } from '~/utils/jobsStorage'
