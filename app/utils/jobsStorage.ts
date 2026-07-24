@@ -101,6 +101,66 @@ const INITIAL_JOBS: Job[] = [
     deadline: '2026-09-30',
     is_active: 1,
     created_at: new Date().toISOString()
+  },
+  {
+    id: 8,
+    title: 'Assistant Manager/Coordinator, Business Development',
+    department: 'Business Development',
+    location: 'Phnom Penh, Cambodia',
+    type: 'Full-time',
+    description: 'Act as the product owner for the assigned brand/product portfolio, taking end-to-end accountability for performance within a 1-week to 12-month work time span.\n\nBuild, maintain, and execute the brand/product portfolio calendar, ensuring all activities are planned, sequenced, and delivered on time.\n\nOwn and update the NPD (New Product Development) tracker, monitoring progress at each gate and flagging risks to timelines or deliverables.\n\nConduct regular market visits to gather first hand insight on consumer behavior, competitor activity, pricing, and execution standards at point of sale.\n\nWrite clear, strategic creative briefs that translate business objectives into actionable direction for internal teams and external agencies.\n\nBuild and maintain performance dashboards that track sales, share, distribution, and other relevant KPIs; surface insights and recommended actions.\n\nLead sprint preparation and planning, breaking down projects into deliverables, assigning owners, and aligning stakeholders on priorities.\n\nFollow up rigorously on all projects, ensuring timelines, quality, and cross-functional commitments are met without senior intervention.\n\nRun experiment projects assigned by the Business Unit Leader and/or Head of Department, applying a test-and-learn approach to validate hypotheses.\n\nDrive in-store visibility for the Confectionery and/or snack portfolio, ensuring planograms, POSM, and trade execution match the brand standards defined by the Business Unit.',
+    requirements: '• Bachelor\'s degree in Marketing, Business Administration, Pharmacy, Life Sciences, or a related field.\n• 3–5 years of experience in Brand Management, Product Management, Trade Marketing, Consumer Health, Pharmaceutical, Healthcare, or FMCG industries.\n• Experience managing marketing campaigns, product launches, or cross-functional projects.\n• Strong project management and organizational skills with the ability to manage multiple priorities and timelines.\n• Good analytical skills with the ability to interpret sales, market, and consumer data and translate insights into action plans.\n• Proficient in Microsoft Excel, PowerPoint, and reporting tools.\n• Ability to develop marketing briefs, presentations, and performance reports.\n• Good understanding of consumer health, OTC products, pharmacy channels, or healthcare marketing is preferred.\n• Strong communication, stakeholder management, and influencing skills.\n• Proactive, detail-oriented, and results-driven, with the ability to work independently and follow through on commitments.\n• Experience coordinating with Sales, Trade Marketing, Regulatory Affairs, Medical Affairs, Supply Chain, and external agencies is an advantage.\n• Willingness to conduct regular market visits and travel when required.\n• Good command of written and spoken English and Khmer.',
+    deadline: '2026-09-30',
+    is_active: 1,
+    created_at: new Date().toISOString()
+  },
+  {
+    id: 9,
+    title: 'Business Development Executive',
+    department: 'Business Development',
+    location: 'Phnom Penh, Cambodia',
+    type: 'Full-time',
+    description: 'To own the day-to-day execution of the Consumer Health portfolio across a 1-week to 12-month time horizon, with the added responsibility of ensuring all activities meet OTC visibility standards and are supported by accurate, compliant scientific content.\n\nAct as the product owner for the assigned brand/product portfolio, taking end-to-end accountability for performance within a 1-week to 12-month work time span.\n\nBuild, maintain, and execute the brand/product portfolio calendar, ensuring all activities are planned, sequenced, and delivered on time.\n\nOwn and update the NPD (New Product Development) tracker, monitoring progress at each gate and flagging risks to timelines or deliverables.\n\nConduct regular market visits to gather first hand insight on consumer behavior, competitor activity, pricing, and execution standards at the point of sale.\n\nWrite clear, strategic creative briefs that translate business objectives into actionable direction for internal teams and external agencies.\n\nBuild and maintain performance dashboards that track sales, share, distribution, and other relevant KPIs; surface insights and recommended actions.\n\nLead sprint preparation and planning, breaking down projects into deliverables, assigning owners, and aligning stakeholders on priorities.\n\nFollow up rigorously on all projects, ensuring timelines, quality, and cross-functional commitments are met without senior intervention.\n\nRun experiment projects assigned by the BU Leader and/or Head of Department, applying a test-and-learn approach to validate hypotheses.\n\nDrive OTC visibility across pharmacy and modern trade channels, ensuring shelf presence, planograms, and POSM meet category and regulatory standards.\n\nManage scientific content for the assigned portfolio — sourcing, validating, updating, and approving claims, product information, and consumer-facing materials in line with medical and regulatory requirements.',
+    requirements: '• Bachelor\'s degree in Marketing, Business Administration, Pharmacy, Life Sciences, or a related field.\n• 1–3 years of experience in Marketing, Brand Management, Trade Marketing, Consumer Health, Pharmaceutical, or FMCG industries.\n• Fresh graduates with strong academic performance and relevant internship experience are encouraged to apply.\n• Strong organizational and project coordination skills with the ability to manage multiple tasks and deadlines.\n• Good analytical skills with the ability to interpret sales and market data and provide actionable insights.\n• Proficient in Microsoft Excel, PowerPoint, and other Microsoft Office applications.\n• Good communication and interpersonal skills with the ability to work effectively across different teams.\n• Ability to prepare clear briefs, reports, and presentations.\n• Detail-oriented, proactive, and willing to learn.\n• Comfortable conducting market visits and gathering consumer and competitor insights.\n• Basic understanding of OTC products, pharmacy channels, or healthcare marketing is an advantage.\n• Good command of written and spoken English and Khmer.',
+    deadline: '2026-09-30',
+    is_active: 1,
+    created_at: new Date().toISOString()
+  },
+  {
+    id: 10,
+    title: 'Graphic Design Intern',
+    department: 'Creative & Design',
+    location: 'Phnom Penh, Cambodia',
+    type: 'Internship',
+    description: 'Assist in designing marketing and communication materials (posters, flyers, banners, brochures, and presentations).\n\nCreate visual content for social media and digital platforms.\n\nEdit photos and basic videos when required.\n\nEnsure designs follow the company\'s branding guidelines.\n\nSupport event branding and other creative projects.\n\nOrganize and maintain design files and templates.\n\nPerform other tasks assigned by the supervisor.',
+    requirements: '• Currently pursuing a Bachelor\'s degree or fresh graduate in Graphic Design, Multimedia, Visual Communication, or a related field.\n• Basic knowledge of Adobe Photoshop, Illustrator, Canva, or similar design software.\n• Basic video editing skills are an advantage.\n• Creative, detail-oriented, and willing to learn.\n• Able to manage time and meet deadlines.\n• Good communication and teamwork skills.',
+    deadline: '2026-09-30',
+    is_active: 1,
+    created_at: new Date().toISOString()
+  },
+  {
+    id: 11,
+    title: 'Marketing and Event Intern',
+    department: 'Marketing & Events',
+    location: 'Phnom Penh, Cambodia',
+    type: 'Internship',
+    description: 'Assist in planning and coordinating marketing events, product launches, exhibitions, and promotional activities.\n\nSupport event preparation, including venue setup, materials, registrations, and logistics.\n\nCoordinate with internal departments and external vendors to ensure smooth event execution.\n\nAssist in preparing marketing documents, presentations, and reports.\n\nMaintain and organize marketing files, records, and promotional materials.\n\nProcess purchase requests, expense claims, and other departmental administrative tasks.\n\nMonitor inventory of marketing materials and office supplies.\n\nPerform other duties assigned by the supervisor.',
+    requirements: '• Currently pursuing a Bachelor\'s degree in Marketing, Business Administration, Event Management, or a related field.\n• Good organizational and coordination skills.\n• Proficient in Microsoft Office (Word, Excel, and PowerPoint).\n• Good communication and interpersonal skills.\n• Detail-oriented, proactive, and willing to learn.\n• Able to work both independently and as part of a team.',
+    deadline: '2026-09-30',
+    is_active: 1,
+    created_at: new Date().toISOString()
+  },
+  {
+    id: 12,
+    title: 'Business System Developer Executive',
+    department: 'Information Technology',
+    location: 'Phnom Penh, Cambodia',
+    type: 'Full-time',
+    description: 'Business systems are developed and improved to support efficient, accurate, and scalable business operations across priority functions.\n\nSales and Distribution systems are stabilized and enhanced through improvement of DMS-related tools, workflows, reporting, and supporting applications.\n\nManual work is reduced through automation of recurring reports, validations, workflows, and data-processing activities.\n\nSystem integrations and data flows are built and maintained so that information moves accurately and reliably across business platforms.\n\nUser requirements are translated into practical system solutions that improve usability, process compliance, data quality, and decision-making.\n\nReliable dashboards, reports, and analytical tools are delivered to improve visibility of performance, process health, and operational opportunities.\n\nSystem issues are diagnosed and resolved at root cause level across application logic, data structures, integrations, and business process usage.\n\nTechnical documentation, user support, and knowledge assets are maintained so that systems remain usable, sustainable, and less dependent on tribal knowledge.\n\nOthers assigned by manager.',
+    requirements: '• Intermediate level of Experience (minimum 2 years of job-related experience).\n• Relevant practical experience in software development, business application development, systems integration, automation, database management, reporting, or digital process improvement may substitute for formal education when the candidate demonstrates the ability to build, improve, troubleshoot, and support business systems effectively.\n• Problem Solving – must identify technical issues, data issues, sync failures, and usage problems, then investigate and resolve or escalate appropriately.\n• Analysis – must work with sales data, identify anomalies, prepare dashboards, produce reports, and compile useful analytical outputs such as distribution gaps and promotional execution reports.\n• Project Management – This role will likely handle multiple enhancements, system changes, automation tasks, and phased improvements across functions, so the ability to plan, coordinate, prioritize, and complete work is important.',
+    deadline: '2026-09-30',
+    is_active: 1,
+    created_at: new Date().toISOString()
   }
 ]
 
@@ -123,13 +183,17 @@ export function getStoredJobs(): Job[] {
       j.title !== 'testing'
     )
 
-    if (filtered.length === 0) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(INITIAL_JOBS))
-      return INITIAL_JOBS
+    // Ensure any new default jobs in INITIAL_JOBS are merged if missing
+    const existingTitles = new Set(filtered.map(j => j.title))
+    let hasNewDefaults = false
+    for (const initJob of INITIAL_JOBS) {
+      if (!existingTitles.has(initJob.title)) {
+        filtered.push(initJob)
+        hasNewDefaults = true
+      }
     }
-    
-    // If obsolete jobs were found in browser localStorage, purge them
-    if (filtered.length !== parsed.length) {
+
+    if (hasNewDefaults || filtered.length !== parsed.length) {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(filtered))
     }
     return filtered

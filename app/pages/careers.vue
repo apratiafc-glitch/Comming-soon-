@@ -128,9 +128,6 @@
             <span class="flex items-center gap-1.5">
               <MapPinIcon class="w-3.5 h-3.5 text-slate-400" /> {{ job.location }}
             </span>
-            <span v-if="job.deadline" class="flex items-center gap-1.5 text-amber-700 bg-amber-50 px-2.5 py-0.5 rounded-md border border-amber-200/60">
-              <CalendarDaysIcon class="w-3.5 h-3.5 text-amber-600" /> {{ formatDate(job.deadline) }}
-            </span>
           </div>
         </button>
       </div>
@@ -188,9 +185,6 @@
                   <h2 class="text-2xl sm:text-3xl font-black text-slate-900 leading-tight">{{ selectedJob.title }}</h2>
                   <div class="flex flex-wrap gap-4 mt-2.5 text-xs text-slate-500 font-semibold">
                     <span class="flex items-center gap-1.5"><ClockIcon class="w-3.5 h-3.5 text-slate-400" /> Posted {{ timeAgo(selectedJob.created_at) }}</span>
-                    <span v-if="selectedJob.deadline" class="flex items-center gap-1.5 text-amber-700 font-bold">
-                      <CalendarDaysIcon class="w-3.5 h-3.5 text-amber-600" /> Apply by {{ formatDate(selectedJob.deadline) }}
-                    </span>
                   </div>
                 </div>
                 <button @click="closeDetail"
@@ -202,20 +196,80 @@
 
             <!-- Scrollable Body -->
             <div class="overflow-y-auto flex-1 px-8 py-6 space-y-7 text-slate-700">
+              <!-- About the Role -->
               <div>
                 <div class="flex items-center gap-2 mb-3">
                   <div class="w-4 h-[2px] bg-blue-600 rounded-full"></div>
                   <h3 class="text-xs font-black tracking-[0.25em] uppercase text-blue-600">About the Role</h3>
                 </div>
-                <p class="text-slate-700 text-sm sm:text-base leading-relaxed whitespace-pre-line font-normal">{{ selectedJob.description }}</p>
+                <ul class="space-y-2.5 text-slate-700 text-sm sm:text-base leading-relaxed font-normal bg-slate-50/70 p-5 rounded-2xl border border-slate-200/80">
+                  <li v-for="(bullet, idx) in getBulletLines(selectedJob.description)" :key="idx" class="flex items-start gap-2.5">
+                    <span class="text-blue-600 font-black flex-shrink-0 mt-0.5">•</span>
+                    <span>{{ bullet }}</span>
+                  </li>
+                </ul>
               </div>
 
+              <!-- Job Requirements -->
               <div v-if="selectedJob.requirements">
                 <div class="flex items-center gap-2 mb-3">
                   <div class="w-4 h-[2px] bg-blue-600 rounded-full"></div>
                   <h3 class="text-xs font-black tracking-[0.25em] uppercase text-blue-600">Job Requirements</h3>
                 </div>
-                <p class="text-slate-700 text-sm sm:text-base leading-relaxed whitespace-pre-line font-normal bg-slate-50/80 p-5 rounded-2xl border border-slate-200/80">{{ selectedJob.requirements }}</p>
+                <ul class="space-y-2.5 text-slate-700 text-sm sm:text-base leading-relaxed font-normal bg-slate-50/70 p-5 rounded-2xl border border-slate-200/80">
+                  <li v-for="(bullet, idx) in getBulletLines(selectedJob.requirements)" :key="idx" class="flex items-start gap-2.5">
+                    <span class="text-blue-600 font-black flex-shrink-0 mt-0.5">•</span>
+                    <span>{{ bullet }}</span>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Working Condition -->
+              <div>
+                <div class="flex items-center gap-2 mb-3">
+                  <div class="w-4 h-[2px] bg-blue-600 rounded-full"></div>
+                  <h3 class="text-xs font-black tracking-[0.25em] uppercase text-blue-600">Working Condition</h3>
+                </div>
+                <div class="bg-blue-50/50 p-5 rounded-2xl border border-blue-100/80 text-slate-700 text-sm sm:text-base leading-relaxed space-y-2 font-medium">
+                  <div class="flex items-start gap-2.5">
+                    <span class="text-blue-600 font-black flex-shrink-0 mt-0.5">•</span>
+                    <span>Monday – Saturday (Two Saturdays off per month), 8:00am – 5:00pm</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Benefits -->
+              <div>
+                <div class="flex items-center gap-2 mb-3">
+                  <div class="w-4 h-[2px] bg-blue-600 rounded-full"></div>
+                  <h3 class="text-xs font-black tracking-[0.25em] uppercase text-blue-600">Benefits</h3>
+                </div>
+                <ul class="space-y-2.5 text-slate-700 text-sm sm:text-base leading-relaxed font-medium bg-emerald-50/40 p-5 rounded-2xl border border-emerald-100">
+                  <li class="flex items-start gap-2.5">
+                    <span class="text-emerald-600 font-black flex-shrink-0 mt-0.5">•</span>
+                    <span>Good benefits will be offered to the successful candidate</span>
+                  </li>
+                  <li class="flex items-start gap-2.5">
+                    <span class="text-emerald-600 font-black flex-shrink-0 mt-0.5">•</span>
+                    <span>Competitive salary based on the market rate with international company</span>
+                  </li>
+                  <li class="flex items-start gap-2.5">
+                    <span class="text-emerald-600 font-black flex-shrink-0 mt-0.5">•</span>
+                    <span>Allowance: phone allowance, lunch, Public Insurance …etc.</span>
+                  </li>
+                  <li class="flex items-start gap-2.5">
+                    <span class="text-emerald-600 font-black flex-shrink-0 mt-0.5">•</span>
+                    <span>Education: Company training, job training, associate development program</span>
+                  </li>
+                  <li class="flex items-start gap-2.5">
+                    <span class="text-emerald-600 font-black flex-shrink-0 mt-0.5">•</span>
+                    <span>Compliance with labor law</span>
+                  </li>
+                  <li class="flex items-start gap-2.5">
+                    <span class="text-emerald-600 font-black flex-shrink-0 mt-0.5">•</span>
+                    <span>Good working environment</span>
+                  </li>
+                </ul>
               </div>
 
               <!-- Why Join -->
@@ -407,6 +461,14 @@ function timeAgo(d) {
   if (!d) return ''
   const n = Math.floor((Date.now() - new Date(d)) / 86400000)
   return n === 0 ? 'today' : n === 1 ? 'yesterday' : n < 30 ? `${n} days ago` : `${Math.floor(n/30)} months ago`
+}
+function getBulletLines(text) {
+  if (!text) return []
+  return text
+    .split(/\r?\n/)
+    .map(line => line.trim())
+    .filter(Boolean)
+    .map(line => line.replace(/^[\u2022\u25E6\u2023\u2043\u2219\*\-]\s*/, ''))
 }
 </script>
 
