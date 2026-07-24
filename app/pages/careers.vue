@@ -287,19 +287,24 @@ const toastMessage = ref('')
 
 function syncJobs() {
   let list = []
-  if (isStaticHost()) {
-    list = getStoredJobs()
-  } else if (apiJobs.value && Array.isArray(apiJobs.value) && apiJobs.value.length > 0) {
+  if (apiJobs.value && Array.isArray(apiJobs.value) && apiJobs.value.length > 0) {
     list = apiJobs.value
   } else {
     list = getStoredJobs()
   }
-  jobs.value = list.filter(j => 
+
+  let filtered = list.filter(j => 
     j.is_active !== 0 && 
     j.title !== 'Sales Executive' && 
     j.title !== 'Warehouse & Logistics Officer' && 
     j.title !== 'testing'
   )
+
+  if (filtered.length === 0) {
+    filtered = getStoredJobs()
+  }
+
+  jobs.value = filtered
 }
 
 function openDetail(job, updateUrl = true) {

@@ -62,6 +62,11 @@ export function getStoredJobs(): Job[] {
       j.title !== 'Warehouse & Logistics Officer' &&
       j.title !== 'testing'
     )
+
+    if (filtered.length === 0) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(INITIAL_JOBS))
+      return INITIAL_JOBS
+    }
     
     // If obsolete jobs were found in browser localStorage, purge them
     if (filtered.length !== parsed.length) {
