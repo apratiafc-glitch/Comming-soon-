@@ -548,6 +548,9 @@ async function loadJobs() {
   } catch {
     jobs.value = getStoredJobs()
   } finally {
+    if (Array.isArray(jobs.value)) {
+      jobs.value.sort((a, b) => (b.id || 0) - (a.id || 0))
+    }
     listLoading.value = false
   }
 }

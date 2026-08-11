@@ -161,6 +161,54 @@ const INITIAL_JOBS: Job[] = [
     deadline: '2026-09-30',
     is_active: 1,
     created_at: new Date().toISOString()
+  },
+  {
+    id: 13,
+    title: 'Creative Content Creator Intern',
+    department: 'Creative & Design',
+    location: 'Phnom Penh, Cambodia',
+    type: 'Internship',
+    description: 'Assist with monthly content planning, scriptwriting, and the production of engaging short-form video content.\n\nResearch trending content, creative styles, and relevant topics that appeal to the target audience.\n\nCollaborate with the Creative and Marketing teams to ensure content aligns with the brand voice, identity, and marketing objectives.\n\nEdit and optimize video content for various social media platforms, including YouTube, TikTok, and Instagram.\n\nSupport the development of creative ideas and visual concepts for digital content.\n\nStay up to date with emerging social media trends, content formats, and creative tools.\n\nBenefits:\n• Opportunity to build a strong creative portfolio through real-world projects.\n• Mentorship and collaboration with experienced Creative and Marketing teams.\n• Gain practical industry experience in digital media, content strategy, video production, and social media trends.\n• Opportunity to develop skills in modern creative and AI-powered content production tools.',
+    requirements: 'Education:\n• Year 4 student or recent graduate in Media Studies, Communication, Journalism, or a related field.\n\nSkills & Competencies:\n• Strong command of English, both spoken and written.\n• Basic knowledge of Adobe Creative Cloud software.\n• Familiarity with AI tools for content creation, such as text-to-video platforms, voice synthesis, and image-generation tools, is a plus.\n• Creative mindset with a strong eye for visual storytelling, composition, and pacing.\n• Ability to work independently, manage multiple tasks, and meet deadlines.\n• Strong communication and teamwork skills.\n\nTechnical Knowledge (Preferred but Not Required):\n• Understanding of social media platforms and video formats, including YouTube, TikTok, and Instagram.\n• Basic knowledge of scriptwriting, storyboarding, video editing, or motion graphics.\n• Familiarity with current social media content trends and best practices.\n\nOther Requirements:\n• Willingness to learn and develop skills in Adobe Creative Cloud and other creative software.\n• Strong attention to detail and a proactive attitude.\n• Ability to take feedback positively and apply it to improve creative work.\n• A portfolio or sample work is highly encouraged.',
+    deadline: '2026-09-30',
+    is_active: 1,
+    created_at: new Date().toISOString()
+  },
+  {
+    id: 14,
+    title: 'Inventory Arrangement Intern',
+    department: 'Supply Chain',
+    location: 'Phnom Penh, Cambodia',
+    type: 'Internship',
+    description: 'Receive Purchase Orders / Delivery Orders from the leader and arrange products for dispatch based on the provided documents.\n\nPhysically pick and pull products from warehouse shelves accurately, strictly following FEFO and FIFO principles.\n\nVerify product types, quantities, and batch codes against the delivery documents to ensure 100% accuracy before handover to delivery driver, ensuring the driver confirms the quantity matches the delivery documents before loading.\n\nAfter delivery, obtain the receiver\'s signature and confirmation on the Proof of Delivery and Handle returned products from drivers receiving them, counting, inspecting their condition and returning them to the correct warehouse location.\n\nSubmit completed delivery documents to the leader.\n\nOrganize and arrange products in the warehouse in an orderly, ensuring proper stacking, labeling, and segregation by SKU.\n\nMaintain a clean, safe, and organized warehouse environment daily including removing empty pallets and organizing packing materials.\n\nPerform any other tasks assigned by the manager or leader.',
+    requirements: '• Currently pursuing or holding a bachelor’s degree or associate degree in Logistics, Supply Chain Management, Business Administration, or a related field.\n• Basic understanding of warehouse operations, FEFO/FIFO principles, and inventory counting.\n• Strong attention to detail, honesty, and accuracy when handling products and documents.\n• Physically fit and able to stand for long periods, lift products up to 15-20 kg, and work in a warehouse environment (non-air-conditioned).\n• Basic computer skills (Microsoft Excel for simple data entry and Outlook for email communication).\n• Good communication skills (Khmer) and basic English reading skills to understand product labels, documents, and simple work instructions.\n• A proactive, hardworking attitude with a willingness to learn, follow instructions, and collaborate effectively with drivers, warehouse staff, and the team.',
+    deadline: '2026-09-30',
+    is_active: 1,
+    created_at: new Date().toISOString()
+  },
+  {
+    id: 15,
+    title: 'Inventory Management Intern',
+    department: 'Supply Chain',
+    location: 'Phnom Penh, Cambodia',
+    type: 'Internship',
+    description: 'Receive delivery documents daily from the leader/Inventory Arrangement Intern to process stock-out entries in the Excel inventory system.\n\nAccurately perform daily stock-out entries in Excel, ensuring every delivery is deducted from the inventory balance on the same business day.\n\nVerify and reconcile the accuracy between the stock-out entries in the Excel system and the Sales Orders (SOs) issued by the Sales Admin team.\n\nRelease the confirmed orders in the DMS system to finalize the transaction.\n\nPrepare and submit the system-generated delivery notes (from DMS) together with all supporting documents to the Finance team daily.\n\nConduct regular physical spot-checks comparing the Excel inventory file against the actual physical products on the warehouse floor and product shelf life to identify and prevent discrepancies proactively.\n\nInvestigate the root cause of any inventory discrepancies found during reconciliation or physical counts and report findings with corrective recommendations to the leader/manager.\n\nPrepare and send a daily update report of all available finished goods quantity to the Sales team every morning.\n\nCompile and send a daily Inventory Report (showing opening stock, stock-in, stock-out, adjustments, and closing balance) to the Finance daily.\n\nPerform any other administrative tasks assigned by the leader or manager.',
+    requirements: '• Currently pursuing or holding a bachelor’s degree or associate degree in Logistics, Supply Chain Management, Business Administration, or a related field.\n• Good proficiency in Microsoft Excel, able to use basic formulas (SUM, IF), VLOOKUP/XLOOKUP, Pivot Tables, sorting, and filtering to manage and reconcile large inventory datasets accurately.\n• Ability to quickly learn DMS systems for order release and document generation.\n• High attention to detail, accuracy, and analytical thinking—must be able to spot numerical discrepancies and mismatches between multiple documents (Excel vs. Sales Orders vs. Physical Stock) and investigate root causes logically.\n• Strong integrity, honesty, and confidentiality—handles sensitive inventory data.\n• Good communication skills (Khmer) and good command of English (at least reading and writing) to understand system codes, product labels, SO documents, and communicate via email with the Sales Admin and Finance teams.\n• Strong organizational and time-management skills.\n• Proactive and willing to walk to the warehouse floor daily to perform physical spot-checks and collaborate effectively with the team.',
+    deadline: '2026-09-30',
+    is_active: 1,
+    created_at: new Date().toISOString()
+  },
+  {
+    id: 16,
+    title: 'Product & Brand Intern',
+    department: 'Business Development',
+    location: 'Phnom Penh, Cambodia',
+    type: 'Internship',
+    description: 'Role Overview:\nThe intern will support the Product Owner and Consumer-Health BU in product development, business development, market research and branding activities. This role is suitable for someone who enjoys learning, is curious about the consumer-health product category, and wants hands-on experience in product management and brand building.\n\n1. Market Research & Competitor Analysis:\n• Support consumer and market insight activities to evaluate product-market fit, including product concepts, packaging, positioning, and pricing.\n• Conduct market research to understand consumer needs, market trends, competitors, and category developments.\n• Collect and analyze information on product features, packaging designs and pricing strategies.\n• Perform market visits to monitor competitor activities, new product launches, merchandising practices, product visibility, and pricing trends.\n• Prepare competitor analysis reports and market intelligence summaries.\n\n2. Product Development & Management Support:\n• Assist in preparing product briefs, project timelines, and development updates.\n• Support coordination and follow-up with cross-functional stakeholders, including R&D, Legal, Design, Sales, Supply Chain, and Finance teams.\n• Assist in reviewing packaging concepts, product claims, product information, and marketing materials.\n• Maintain and organize product-related documentation and development records.\n• Monitor project milestones and support timely execution of development activities.\n\n3. Business Development Support:\n• Research market gaps, emerging consumer trends, and potential opportunities for portfolio expansion.\n• Support the evaluation of new product concepts and business opportunities.\n• Assist in competitor benchmarking and category analysis.\n• Prepare product information, presentations, and supporting materials required for New Product Launch (NPL) activities.\n• Contribute to the development of marketing and launch recommendations based on market findings.\n\n4. Additional Tasks:\n• Prepare meeting agendas, minutes, and follow-up action trackers.\n• Assist in monitoring project progress and ensuring alignment across stakeholders.\n• Support preparation of presentations, reports, dashboards, and other business documents.\n• Provide support for product launches, marketing initiatives, and other ad hoc business projects as assigned.',
+    requirements: '• Education: Final-year university student or fresh graduate in Marketing, Business Administration, Management, or a related field.\n• Language: Fluent in Khmer and proficient in English (both written and spoken).\n• Computer Skills: Proficient in Microsoft Office (PowerPoint for presentations and Excel for data analysis).\n• Personal Skills & Quality:\n  - Strong interest in product development, branding, and consumer-health/health-support categories.\n  - Creative thinker with basic research and analytical skills.\n  - Good communication and coordination abilities, able to work with multiple teams.\n  - Curious, eager to learn, detail-oriented, and organized.\n  - Responsible, reliable, and willing to support different tasks.',
+    deadline: '2026-09-30',
+    is_active: 1,
+    created_at: new Date().toISOString()
   }
 ]
 
@@ -197,9 +245,9 @@ export function getStoredJobs(): Job[] {
     if (hasNewDefaults || filtered.length !== parsed.length) {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(filtered))
     }
-    return filtered
+    return filtered.sort((a, b) => b.id - a.id)
   } catch {
-    return INITIAL_JOBS
+    return [...INITIAL_JOBS].sort((a, b) => b.id - a.id)
   }
 }
 

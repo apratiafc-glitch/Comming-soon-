@@ -7,7 +7,7 @@ export default defineEventHandler(async () => {
     SELECT id, title, department, location, type, description, requirements, deadline, created_at
     FROM jobs
     WHERE is_active = 1
-    ORDER BY created_at DESC
+    ORDER BY id DESC, created_at DESC
   `)
 
   if (!result.length || !result[0] || !result[0].values.length) {

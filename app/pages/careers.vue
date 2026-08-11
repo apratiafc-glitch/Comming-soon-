@@ -393,6 +393,8 @@ function syncJobs() {
     filtered = getStoredJobs()
   }
 
+  filtered.sort((a, b) => (b.id || 0) - (a.id || 0))
+
   jobs.value = filtered
 }
 
