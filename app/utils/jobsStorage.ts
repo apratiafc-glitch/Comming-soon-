@@ -209,6 +209,18 @@ const INITIAL_JOBS: Job[] = [
     deadline: '2026-09-30',
     is_active: 1,
     created_at: new Date().toISOString()
+  },
+  {
+    id: 17,
+    title: 'Mechanical Maintenance Executive',
+    department: 'Engineering & Maintenance',
+    location: 'Phnom Penh, Cambodia',
+    type: 'Full-time',
+    description: 'Workshop and Mechanical Modification:\n• Responsible for workshop work such as welding, cutting, drilling, etc. to support the modification of mechanical parts and equipment, capable of doing in-house modifications for higher quality, efficiency, and cost savings.\n\nAsset Reliability:\n• Execute maintenance of facility assets to ensure high reliability, especially processing assets, through conducting inspections, preventive maintenance, and analyzing downtime issues with effective root cause analysis methodologies.\n\nContractor Coordination:\n• Oversee on-site working contractors to ensure their work is safe, high-quality, and compliant with AFC guidelines.\n\nInternal Customer Support:\n• Ensure high-quality and on-time technical support to cross-functional teams for engineering and maintenance assistance to achieve company goals.',
+    requirements: 'Knowledge:\n• Knowledge of industrial mechanical systems.\n• Knowledge of using industrial tools and equipment.\n• Basic safety understanding for manufacturing environments.\n• Basic understanding of GMP (Good Manufacturing Practice).\n\nSkills & Competencies:\n• Preventive maintenance for food production equipment, utilities equipment, and general mechanical equipment.\n• Maintenance troubleshooting for food production equipment, utilities equipment, and general mechanical equipment.\n• Strong hands-on mechanical skills (cutting, welding, drilling, etc.).',
+    deadline: '2026-09-30',
+    is_active: 1,
+    created_at: new Date().toISOString()
   }
 ]
 
