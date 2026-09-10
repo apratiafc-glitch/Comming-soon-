@@ -212,7 +212,7 @@ const INITIAL_JOBS: Job[] = [
   },
   {
     id: 17,
-    title: 'Mechanical Maintenance Executive',
+    title: 'ER Work Shop',
     department: 'Engineering & Maintenance',
     location: 'Phnom Penh, Cambodia',
     type: 'Full-time',
