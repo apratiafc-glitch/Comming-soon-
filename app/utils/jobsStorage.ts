@@ -212,12 +212,24 @@ const INITIAL_JOBS: Job[] = [
   },
   {
     id: 17,
-    title: 'ER Work Shop',
+    title: 'ER Workshop Technician',
     department: 'Engineering & Maintenance',
     location: 'Phnom Penh, Cambodia',
     type: 'Full-time',
     description: 'Workshop and Mechanical Modification:\n• Responsible for workshop work such as welding, cutting, drilling, etc. to support the modification of mechanical parts and equipment, capable of doing in-house modifications for higher quality, efficiency, and cost savings.\n\nAsset Reliability:\n• Execute maintenance of facility assets to ensure high reliability, especially processing assets, through conducting inspections, preventive maintenance, and analyzing downtime issues with effective root cause analysis methodologies.\n\nContractor Coordination:\n• Oversee on-site working contractors to ensure their work is safe, high-quality, and compliant with AFC guidelines.\n\nInternal Customer Support:\n• Ensure high-quality and on-time technical support to cross-functional teams for engineering and maintenance assistance to achieve company goals.',
     requirements: 'Knowledge:\n• Knowledge of industrial mechanical systems.\n• Knowledge of using industrial tools and equipment.\n• Basic safety understanding for manufacturing environments.\n• Basic understanding of GMP (Good Manufacturing Practice).\n\nSkills & Competencies:\n• Preventive maintenance for food production equipment, utilities equipment, and general mechanical equipment.\n• Maintenance troubleshooting for food production equipment, utilities equipment, and general mechanical equipment.\n• Strong hands-on mechanical skills (cutting, welding, drilling, etc.).',
+    deadline: '2026-09-30',
+    is_active: 1,
+    created_at: new Date().toISOString()
+  },
+  {
+    id: 18,
+    title: 'Payroll and Accounting Executive',
+    department: 'Finance & Accounting',
+    location: 'Phnom Penh, Cambodia',
+    type: 'Full-time',
+    description: 'Execute the end-to-end monthly payroll cycle for all employees, ensuring accuracy, completeness and on-time disbursement.\n\nMaintain and control employee payroll master data — salaries, allowances, deductions, overtime and other benefits — with complete supporting documentation.\n\nCalculate, reconcile and remit statutory contributions and salary tax in line with prevailing regulations.\n\nAct as first point of contact for employee payroll and benefits enquiries, resolving issues and explaining policies and practices.\n\nSafeguard the confidentiality and integrity of payroll and employee information at all times.\n\nEnsure payroll and accounting activities comply with applicable laws, regulations and company policies, and recommend improvements where gaps are identified.\n\nRecord customer receipts and issue receipt vouchers with adequate supporting documentation.\n\nPerform monthly reconciliation of balance sheet accounts and support month-end and year-end closing.\n\nMaintain accurate customer accounts and aging reports, and follow up on discrepancies with the sales team.\n\nSupport external and internal audits by providing required documents, schedules and explanations.\n\nProvide financial information, analysis and supporting documents to management when required.\n\nCoordinate and review monthly finished-goods reconciliation documentation (delegated to Accounting Intern).\n\nProcess and record accounts payable and accounts receivable transactions, ensuring accurate and timely posting.',
+    requirements: '• Applies practical knowledge of the job area, typically obtained through advanced education and work experience.\n• Works independently with general supervision.\n• Problems faced are difficult but typically not complex.\n• May influence others within the job area through explanation of facts, policies and practices.',
     deadline: '2026-09-30',
     is_active: 1,
     created_at: new Date().toISOString()
@@ -235,14 +247,23 @@ export function getStoredJobs(): Job[] {
     const parsed = JSON.parse(raw)
     if (!Array.isArray(parsed)) return INITIAL_JOBS
     
-    // Exclude obsolete/removed job titles
-    const filtered = parsed.filter(j => 
-      j.is_active !== 0 && 
-      j.title !== 'Sales Executive' && 
-      j.title !== 'Warehouse & Logistics Officer' &&
-      j.title !== 'testing' &&
-      j.title !== 'Sales Order Executive'
-    )
+    // Exclude obsolete/removed job titles and migrate renamed titles
+    let migrated = false
+    const filtered = parsed
+      .filter(j => 
+        j.is_active !== 0 && 
+        j.title !== 'Sales Executive' && 
+        j.title !== 'Warehouse & Logistics Officer' &&
+        j.title !== 'testing' &&
+        j.title !== 'Sales Order Executive'
+      )
+      .map(j => {
+        if (j.title === 'ER Work Shop' || j.title === 'ER Workshop Technicain') {
+          migrated = true
+          return { ...j, title: 'ER Workshop Technician' }
+        }
+        return j
+      })
 
     // Ensure any new default jobs in INITIAL_JOBS are merged if missing
     const existingTitles = new Set(filtered.map(j => j.title))
@@ -254,7 +275,7 @@ export function getStoredJobs(): Job[] {
       }
     }
 
-    if (hasNewDefaults || filtered.length !== parsed.length) {
+    if (hasNewDefaults || migrated || filtered.length !== parsed.length) {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(filtered))
     }
     return filtered.sort((a, b) => b.id - a.id)

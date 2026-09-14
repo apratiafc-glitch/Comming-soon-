@@ -381,13 +381,20 @@ function syncJobs() {
     list = getStoredJobs()
   }
 
-  let filtered = list.filter(j => 
-    j.is_active !== 0 && 
-    j.title !== 'Sales Executive' && 
-    j.title !== 'Warehouse & Logistics Officer' && 
-    j.title !== 'testing' &&
-    j.title !== 'Sales Order Executive'
-  )
+  let filtered = list
+    .filter(j => 
+      j.is_active !== 0 && 
+      j.title !== 'Sales Executive' && 
+      j.title !== 'Warehouse & Logistics Officer' && 
+      j.title !== 'testing' &&
+      j.title !== 'Sales Order Executive'
+    )
+    .map(j => {
+      if (j.title === 'ER Work Shop' || j.title === 'ER Workshop Technicain') {
+        return { ...j, title: 'ER Workshop Technician' }
+      }
+      return j
+    })
 
   if (filtered.length === 0) {
     filtered = getStoredJobs()
@@ -465,10 +472,13 @@ onMounted(() => {
   // Auto-open job detail if query parameter ?job=ID is present
   const jobParam = route.query.job || route.query.id
   if (jobParam) {
-    const found = jobs.value.find(j => 
-      String(j.id) === String(jobParam) || 
-      j.title.toLowerCase().replace(/\s+/g, '-') === String(jobParam).toLowerCase()
-    )
+    const param = String(jobParam).toLowerCase()
+    const found = jobs.value.find(j => {
+      const slug = (j.title || '').toLowerCase().replace(/\s+/g, '-')
+      return String(j.id) === param || 
+        slug === param ||
+        (j.id === 17 && (param === 'er-work-shop' || param === 'er-workshop-technicain' || param === 'er-workshop-technician'))
+    })
     if (found) {
       openDetail(found, false)
     }
