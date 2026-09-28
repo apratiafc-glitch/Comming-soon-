@@ -289,39 +289,6 @@
                 </div>
               </div>
 
-              <!-- Benefits -->
-              <div>
-                <div class="flex items-center gap-2 mb-3">
-                  <div class="w-4 h-[2px] bg-blue-600 rounded-full"></div>
-                  <h3 class="text-xs font-black tracking-[0.25em] uppercase text-blue-600">Benefits</h3>
-                </div>
-                <ul class="space-y-2.5 text-slate-700 text-sm sm:text-base leading-relaxed font-medium bg-emerald-50/40 p-5 rounded-2xl border border-emerald-100">
-                  <li class="flex items-start gap-2.5">
-                    <span class="text-emerald-600 font-black flex-shrink-0 mt-0.5">•</span>
-                    <span>Good benefits will be offered to the successful candidate</span>
-                  </li>
-                  <li class="flex items-start gap-2.5">
-                    <span class="text-emerald-600 font-black flex-shrink-0 mt-0.5">•</span>
-                    <span>Competitive salary based on the market rate with international company</span>
-                  </li>
-                  <li class="flex items-start gap-2.5">
-                    <span class="text-emerald-600 font-black flex-shrink-0 mt-0.5">•</span>
-                    <span>Allowance: phone allowance, lunch, Public Insurance …etc.</span>
-                  </li>
-                  <li class="flex items-start gap-2.5">
-                    <span class="text-emerald-600 font-black flex-shrink-0 mt-0.5">•</span>
-                    <span>Education: Company training, job training, associate development program</span>
-                  </li>
-                  <li class="flex items-start gap-2.5">
-                    <span class="text-emerald-600 font-black flex-shrink-0 mt-0.5">•</span>
-                    <span>Compliance with labor law</span>
-                  </li>
-                  <li class="flex items-start gap-2.5">
-                    <span class="text-emerald-600 font-black flex-shrink-0 mt-0.5">•</span>
-                    <span>Good working environment</span>
-                  </li>
-                </ul>
-              </div>
 
               <!-- Why Join -->
               <div class="rounded-2xl p-6 bg-gradient-to-br from-blue-50/80 to-indigo-50/50 border border-blue-100">
