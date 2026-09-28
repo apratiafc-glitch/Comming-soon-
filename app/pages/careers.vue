@@ -108,8 +108,13 @@
             </div>
 
             <!-- Title -->
-            <h2 class="text-xl font-black text-slate-900 group-hover:text-blue-600 transition-colors leading-snug mb-1.5">
-              {{ job.title }}
+            <h2 class="text-xl leading-snug mb-1.5">
+              <span class="font-black text-slate-900 group-hover:text-blue-600 transition-colors">
+                {{ parseJobTitle(job.title).main }}<span v-if="parseJobTitle(job.title).sub">,</span>
+              </span>
+              <span v-if="parseJobTitle(job.title).sub" class="block text-xs font-semibold text-slate-500 mt-0.5 group-hover:text-slate-600">
+                {{ parseJobTitle(job.title).sub }}
+              </span>
             </h2>
 
             <!-- Dept -->
@@ -216,7 +221,15 @@
                       <MapPinIcon class="w-3.5 h-3.5 text-slate-500" /> {{ selectedJob.location }}
                     </span>
                   </div>
-                  <h2 class="text-2xl sm:text-3xl font-black text-slate-900 leading-tight">{{ selectedJob.title }}</h2>
+                  <div class="mb-1">
+                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-1">Job Title</span>
+                    <h2 class="leading-tight">
+                      <span class="text-2xl sm:text-3xl font-black text-slate-900">{{ parseJobTitle(selectedJob.title).main }}<span v-if="parseJobTitle(selectedJob.title).sub">,</span></span>
+                      <span v-if="parseJobTitle(selectedJob.title).sub" class="text-sm sm:text-base font-semibold text-slate-500 block sm:inline sm:ml-2">
+                        {{ parseJobTitle(selectedJob.title).sub }}
+                      </span>
+                    </h2>
+                  </div>
                   <div class="flex flex-wrap gap-4 mt-2.5 text-xs text-slate-500 font-semibold">
                     <span class="flex items-center gap-1.5"><ClockIcon class="w-3.5 h-3.5 text-slate-400" /> Posted {{ timeAgo(selectedJob.created_at) }}</span>
                   </div>
@@ -228,34 +241,38 @@
               </div>
             </div>
 
-            <!-- Scrollable Body -->
+            <!-- Scrollable Body (Light Mode Template) -->
             <div class="overflow-y-auto flex-1 px-8 py-6 space-y-7 text-slate-700">
-              <!-- About the Role -->
-              <div>
-                <div class="flex items-center gap-2 mb-3">
-                  <div class="w-4 h-[2px] bg-blue-600 rounded-full"></div>
-                  <h3 class="text-xs font-black tracking-[0.25em] uppercase text-blue-600">About the Role</h3>
+              <!-- Structured Job Sections -->
+              <div v-for="(sec, sIdx) in getStructuredJobSections(selectedJob)" :key="sIdx" class="space-y-3.5">
+                <!-- Main Section Title -->
+                <div v-if="sec.title" class="flex items-center gap-2 pt-2">
+                  <div class="w-3.5 h-[2px] bg-blue-600 rounded-full"></div>
+                  <h3 class="text-xs sm:text-sm font-black tracking-[0.2em] uppercase text-blue-600">
+                    {{ sec.title }}:
+                  </h3>
                 </div>
-                <ul class="space-y-2.5 text-slate-700 text-sm sm:text-base leading-relaxed font-normal bg-slate-50/70 p-5 rounded-2xl border border-slate-200/80">
-                  <li v-for="(bullet, idx) in getBulletLines(selectedJob.description)" :key="idx" class="flex items-start gap-2.5">
-                    <span class="text-blue-600 font-black flex-shrink-0 mt-0.5">•</span>
-                    <span>{{ bullet }}</span>
-                  </li>
-                </ul>
-              </div>
 
-              <!-- Job Requirements -->
-              <div v-if="selectedJob.requirements">
-                <div class="flex items-center gap-2 mb-3">
-                  <div class="w-4 h-[2px] bg-blue-600 rounded-full"></div>
-                  <h3 class="text-xs font-black tracking-[0.25em] uppercase text-blue-600">Job Requirements</h3>
+                <!-- Paragraphs (e.g. Role Summary text) -->
+                <div v-if="sec.paragraphs && sec.paragraphs.length" class="bg-slate-50/80 p-5 sm:p-6 rounded-2xl border border-slate-200/80 text-slate-700 text-sm sm:text-base leading-relaxed space-y-3 font-normal">
+                  <p v-for="(p, pIdx) in sec.paragraphs" :key="pIdx">{{ p }}</p>
                 </div>
-                <ul class="space-y-2.5 text-slate-700 text-sm sm:text-base leading-relaxed font-normal bg-slate-50/70 p-5 rounded-2xl border border-slate-200/80">
-                  <li v-for="(bullet, idx) in getBulletLines(selectedJob.requirements)" :key="idx" class="flex items-start gap-2.5">
-                    <span class="text-blue-600 font-black flex-shrink-0 mt-0.5">•</span>
-                    <span>{{ bullet }}</span>
-                  </li>
-                </ul>
+
+                <!-- Subsections (Key Accountabilities & Qualifications continuous flow) -->
+                <div v-if="sec.subsections && sec.subsections.length" class="bg-slate-50/80 p-5 sm:p-6 rounded-2xl border border-slate-200/80 space-y-6">
+                  <div v-for="(sub, subIdx) in sec.subsections" :key="subIdx" class="space-y-2.5">
+                    <h4 v-if="sub.title" class="text-sm sm:text-base font-bold text-slate-900 flex items-start gap-2">
+                      <span v-if="/^\d+\./.test(sub.title)">{{ sub.title }}</span>
+                      <span v-else>{{ sub.title }}:</span>
+                    </h4>
+                    <ul v-if="sub.bullets && sub.bullets.length" class="space-y-2 pl-2 sm:pl-3 text-slate-700 text-sm sm:text-base leading-relaxed font-normal">
+                      <li v-for="(bullet, bIdx) in sub.bullets" :key="bIdx" class="flex items-start gap-2.5">
+                        <span class="text-blue-600 font-bold flex-shrink-0 mt-0.5">•</span>
+                        <span>{{ bullet }}</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
               </div>
 
               <!-- Working Condition -->
@@ -509,13 +526,76 @@ function timeAgo(d) {
   const n = Math.floor((Date.now() - new Date(d)) / 86400000)
   return n === 0 ? 'today' : n === 1 ? 'yesterday' : n < 30 ? `${n} days ago` : `${Math.floor(n/30)} months ago`
 }
+function normalizeNewlines(str) {
+  if (!str) return ''
+  return str.replace(/\\r\\n/g, '\n').replace(/\\n/g, '\n').replace(/\\r/g, '\n')
+}
+
 function getBulletLines(text) {
   if (!text) return []
-  return text
+  return normalizeNewlines(text)
     .split(/\r?\n/)
     .map(line => line.trim())
     .filter(Boolean)
     .map(line => line.replace(/^[\u2022\u25E6\u2023\u2043\u2219\*\-]\s*/, ''))
+}
+
+function parseJobTitle(title) {
+  if (!title) return { main: '', sub: '' }
+  if (title.includes(',')) {
+    const parts = title.split(',')
+    return { main: parts[0].trim(), sub: parts.slice(1).join(',').trim() }
+  }
+  const match = title.match(/^(.*?)\s*\((.*?)\)$/)
+  if (match) return { main: match[1].trim(), sub: match[2].trim() }
+  return { main: title, sub: '' }
+}
+
+function getStructuredJobSections(job) {
+  if (!job) return []
+  const fullText = normalizeNewlines(job.description || '') + '\n\n' + normalizeNewlines(job.requirements || '')
+  const lines = fullText.split(/\r?\n/).map(l => l.trim()).filter(Boolean)
+  const hasStructuredHeaders = lines.some(l => 
+    /^(Role Summary|Key Accountabilities|Qualifications and competencies|Qualifications|Key Responsibilities):?$/i.test(l)
+  )
+  if (!hasStructuredHeaders) {
+    const legacy = []
+    if (job.description) legacy.push({ title: 'About the Role', paragraphs: [], subsections: [{ title: '', bullets: getBulletLines(job.description) }] })
+    if (job.requirements) legacy.push({ title: 'Job Requirements', paragraphs: [], subsections: [{ title: '', bullets: getBulletLines(job.requirements) }] })
+    return legacy
+  }
+  const sections = []
+  let currentSec = null
+  let currentSub = null
+  for (const line of lines) {
+    if (/^(Role Summary|Key Accountabilities|Qualifications and competencies|Key Responsibilities|Qualifications|About the Role|Job Requirements):?$/i.test(line)) {
+      currentSec = { title: line.replace(/:$/, ''), paragraphs: [], subsections: [] }
+      sections.push(currentSec)
+      currentSub = null
+      continue
+    }
+    if (!currentSec) {
+      currentSec = { title: '', paragraphs: [], subsections: [] }
+      sections.push(currentSec)
+    }
+    const isNumbered = /^\d+\.\s+[A-Za-z]/.test(line)
+    const isCategory = /^(Education|Experience|Knowledge and skills|Competencies|Skills & Competencies|Knowledge|Personal Skills & Quality|Technical Knowledge):?$/i.test(line)
+    if (isNumbered || isCategory) {
+      currentSub = { title: line.replace(/:$/, ''), bullets: [] }
+      currentSec.subsections.push(currentSub)
+      continue
+    }
+    const bulletMatch = line.match(/^[\u2022\u25E6\u2023\u2043\u2219\*\-]\s*(.*)$/)
+    if (bulletMatch) {
+      if (!currentSub) { currentSub = { title: '', bullets: [] }; currentSec.subsections.push(currentSub) }
+      currentSub.bullets.push(bulletMatch[1].trim())
+      continue
+    }
+    if (currentSub && currentSub.bullets.length === 0) currentSub.bullets.push(line)
+    else if (!currentSub || currentSec.subsections.length === 0) currentSec.paragraphs.push(line)
+    else currentSub.bullets.push(line)
+  }
+  return sections
 }
 </script>
 

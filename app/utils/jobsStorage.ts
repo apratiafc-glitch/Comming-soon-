@@ -233,6 +233,18 @@ const INITIAL_JOBS: Job[] = [
     deadline: '2026-09-30',
     is_active: 1,
     created_at: new Date().toISOString()
+  },
+  {
+    id: 19,
+    title: 'Senior HR Specialist, Talent Development and Compensation & Benefits',
+    department: 'Human Resources',
+    location: 'Phnom Penh, Cambodia',
+    type: 'Full-time',
+    description: 'Role Summary:\nThis company-wide specialist role helps deploy the company\'s existing Lean Management System and develops employees through it, while owning compensation and benefits, talent and performance management, and organization design. It is part of a decentralized HR structure: compliance, Ministry of Labor reporting, commercial HR, and factory HR are handled by other specialists. The role is a hands-on doer focused on building employee capability and improving business results, not an administrative or compliance role.\n\nKey Accountabilities:\n1. Learning, development and lean deployment (40%)\n• Lead the deployment of the company\'s existing Lean Management System across departments and develop employees through it (the role deploys the system; it does not design a new one).\n• Follow up after training: check that methods are applied in daily work, review results, and drive continuous improvement.\n• Build employee capability and career development through a consistent management system across departments.\n• Run the annual training needs analysis and manage the training plan and budget.\n• Deliver or source training programs, including onboarding and manager development.\n• Measure training effectiveness and keep training records.\n\n2. Talent and performance management (20%)\n• Coordinate the performance review cycle and link results to pay and development.\n• Facilitate talent reviews and succession plans for critical roles.\n• Build career paths for key job families.\n\n3. Organization design (15%)\n• Go beyond maintaining the organization chart: review structures across the company and recommend changes.\n• Identify missing positions, staffing gaps, excess management layers, and inappropriate reporting lines.\n• Advise on the right balance between frontline employees and managers.\n\n4. Compensation and reward (15%)\n• Maintain job grades and salary bands, benchmarked against the Cambodian market – work with agency.\n• Review market rates and advise on company-wide salary adjustments; lead the annual salary review with Finance, within the approved budget.\n• Review and advise on bonus and incentive schemes for fairness and affordability; commercial incentive programs remain owned by the commercial team.\n\n5. HR operations and employee relations (5%)\n• Advise managers and employees on HR policies, contracts, and probation under the Cambodian Labor Law.\n• Handle employee relations cases and disciplinary matters fairly.\n• Compliance and Ministry of Labor reporting stay with the Compliance function; this role advises and serves as backup only.\n\n6. HR data and reporting (5%)\n• Keep HR data accurate and produce monthly HR reports.\n• Use people data to support decisions on pay, attrition, and training.',
+    requirements: 'Qualifications and competencies:\n\nEducation:\n• Bachelor\'s degree in Human Resources, Business, or a related field is preferred but not required; capability and results matter more than degrees.\n• HR or lean certification (e.g., CIPD, SHRM, Lean Six Sigma) is a plus.\n\nExperience:\n• At least 7 years in HR, C&B, L&D, or operational excellence as a guide.\n• Practical experience with a Lean Management System is strongly preferred. Exceptionally smart, fast-learning.\n• Hands-on experience with salary reviews, benchmarking, and training programs.\n• Proven track record of completing work and delivering measurable results.\n\nKnowledge and skills:\n• Plan-Do-Check-Act (PDCA) and structured problem solving, including A3 thinking.\n• Strong execution: gets the job done with ownership, follow-up, and sound judgment.\n• Lean tools: Kaizen, value-stream mapping, Kata, visual management, gemba walks, and daily management.\n• Meeting facilitation, presentations, proposal writing, and project management.\n• Cambodian Labor Law, NSSF.\n• Strong Excel skills and experience with an HRIS (HR Systems) and payroll system.\n• Fluent Khmer and professional English.\n\nCompetencies:\n• Smart, proactive, and driven: learns quickly, takes initiative, and pushes for results.\n• Hands-on doer: applies the methods personally and earns credibility through results, not only training.\n• Analytical: turns pay and people data into clear recommendations.\n• Integrity: handles salary and personal data confidentially and consistently.\n• Communication: explains pay decisions clearly and delivers engaging training.',
+    deadline: '2026-10-31',
+    is_active: 1,
+    created_at: new Date().toISOString()
   }
 ]
 
@@ -265,12 +277,15 @@ export function getStoredJobs(): Job[] {
         return j
       })
 
-    // Ensure any new default jobs in INITIAL_JOBS are merged if missing
-    const existingTitles = new Set(filtered.map(j => j.title))
+    // Ensure any new default jobs in INITIAL_JOBS are merged if missing and updated
     let hasNewDefaults = false
     for (const initJob of INITIAL_JOBS) {
-      if (!existingTitles.has(initJob.title)) {
+      const idx = filtered.findIndex(j => j.id === initJob.id || j.title === initJob.title)
+      if (idx === -1) {
         filtered.push(initJob)
+        hasNewDefaults = true
+      } else if (initJob.id === 19 && (filtered[idx].description !== initJob.description || filtered[idx].requirements !== initJob.requirements)) {
+        filtered[idx] = { ...filtered[idx], description: initJob.description, requirements: initJob.requirements }
         hasNewDefaults = true
       }
     }
