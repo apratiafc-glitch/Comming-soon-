@@ -110,10 +110,10 @@
             <!-- Title -->
             <h2 class="text-xl leading-snug mb-1.5">
               <span class="font-black text-slate-900 group-hover:text-blue-600 transition-colors">
-                {{ parseJobTitle(job.title).main }}<span v-if="parseJobTitle(job.title).sub">,</span>
+                {{ parseJobTitle(job.title).main }}
               </span>
               <span v-if="parseJobTitle(job.title).sub" class="block text-xs font-semibold text-slate-500 mt-0.5 group-hover:text-slate-600">
-                {{ parseJobTitle(job.title).sub }}
+                ({{ parseJobTitle(job.title).sub }})
               </span>
             </h2>
 
@@ -224,9 +224,9 @@
                   <div class="mb-1">
                     <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-1">Job Title</span>
                     <h2 class="leading-tight">
-                      <span class="text-2xl sm:text-3xl font-black text-slate-900">{{ parseJobTitle(selectedJob.title).main }}<span v-if="parseJobTitle(selectedJob.title).sub">,</span></span>
+                      <span class="text-2xl sm:text-3xl font-black text-slate-900">{{ parseJobTitle(selectedJob.title).main }}</span>
                       <span v-if="parseJobTitle(selectedJob.title).sub" class="text-sm sm:text-base font-semibold text-slate-500 block sm:inline sm:ml-2">
-                        {{ parseJobTitle(selectedJob.title).sub }}
+                        ({{ parseJobTitle(selectedJob.title).sub }})
                       </span>
                     </h2>
                   </div>
@@ -542,12 +542,14 @@ function getBulletLines(text) {
 
 function parseJobTitle(title) {
   if (!title) return { main: '', sub: '' }
+  const match = title.match(/^(.*?)\s*\((.*?)\)$/)
+  if (match) {
+    return { main: match[1].trim(), sub: match[2].trim().replace(/^\(|\)$/g, '') }
+  }
   if (title.includes(',')) {
     const parts = title.split(',')
-    return { main: parts[0].trim(), sub: parts.slice(1).join(',').trim() }
+    return { main: parts[0].trim(), sub: parts.slice(1).join(',').trim().replace(/^\(|\)$/g, '') }
   }
-  const match = title.match(/^(.*?)\s*\((.*?)\)$/)
-  if (match) return { main: match[1].trim(), sub: match[2].trim() }
   return { main: title, sub: '' }
 }
 
