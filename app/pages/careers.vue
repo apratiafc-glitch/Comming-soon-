@@ -271,8 +271,8 @@
                           <span class="text-blue-600 font-bold flex-shrink-0 mt-0.5">•</span>
                           <span>{{ typeof bullet === 'string' ? bullet : bullet.text }}</span>
                         </div>
-                        <ul v-if="typeof bullet === 'object' && bullet.children && bullet.children.length" class="space-y-2 pl-5 sm:pl-6 pt-0.5">
-                          <li v-for="(child, cIdx) in bullet.children" :key="cIdx" class="flex items-start gap-2.5 text-slate-600">
+                        <ul v-if="typeof bullet === 'object' && bullet.children && bullet.children.length" class="space-y-2.5 pl-8 sm:pl-11 pt-1.5 pb-1">
+                          <li v-for="(child, cIdx) in bullet.children" :key="cIdx" class="flex items-start gap-2.5 text-slate-600 text-sm sm:text-base leading-relaxed">
                             <span class="text-blue-500 font-bold flex-shrink-0 mt-0.5">•</span>
                             <span>{{ child }}</span>
                           </li>
