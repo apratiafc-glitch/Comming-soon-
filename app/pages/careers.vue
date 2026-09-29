@@ -265,10 +265,18 @@
                       <span v-if="/^\d+\./.test(sub.title)">{{ sub.title }}</span>
                       <span v-else>{{ sub.title }}:</span>
                     </h4>
-                    <ul v-if="sub.bullets && sub.bullets.length" class="space-y-2 pl-2 sm:pl-3 text-slate-700 text-sm sm:text-base leading-relaxed font-normal">
-                      <li v-for="(bullet, bIdx) in sub.bullets" :key="bIdx" class="flex items-start gap-2.5">
-                        <span class="text-blue-600 font-bold flex-shrink-0 mt-0.5">•</span>
-                        <span>{{ bullet }}</span>
+                    <ul v-if="sub.bullets && sub.bullets.length" class="space-y-2.5 pl-2 sm:pl-3 text-slate-700 text-sm sm:text-base leading-relaxed font-normal">
+                      <li v-for="(bullet, bIdx) in sub.bullets" :key="bIdx" class="space-y-2">
+                        <div class="flex items-start gap-2.5">
+                          <span class="text-blue-600 font-bold flex-shrink-0 mt-0.5">•</span>
+                          <span>{{ typeof bullet === 'string' ? bullet : bullet.text }}</span>
+                        </div>
+                        <ul v-if="typeof bullet === 'object' && bullet.children && bullet.children.length" class="space-y-2 pl-5 sm:pl-6 pt-0.5">
+                          <li v-for="(child, cIdx) in bullet.children" :key="cIdx" class="flex items-start gap-2.5 text-slate-600">
+                            <span class="text-blue-500 font-bold flex-shrink-0 mt-0.5">•</span>
+                            <span>{{ child }}</span>
+                          </li>
+                        </ul>
                       </li>
                     </ul>
                   </div>
@@ -523,7 +531,8 @@ function parseJobTitle(title) {
 function getStructuredJobSections(job) {
   if (!job) return []
   const fullText = normalizeNewlines(job.description || '') + '\n\n' + normalizeNewlines(job.requirements || '')
-  const lines = fullText.split(/\r?\n/).map(l => l.trim()).filter(Boolean)
+  const rawLines = fullText.split(/\r?\n/)
+  const lines = rawLines.map(l => l.trim()).filter(Boolean)
   const hasStructuredHeaders = lines.some(l => 
     /^(Role Summary|Key Accountabilities|Qualifications and competencies|Qualifications|Key Responsibilities):?$/i.test(l)
   )
@@ -536,7 +545,10 @@ function getStructuredJobSections(job) {
   const sections = []
   let currentSec = null
   let currentSub = null
-  for (const line of lines) {
+  for (const rawLine of rawLines) {
+    const line = rawLine.trim()
+    if (!line) continue
+
     if (/^(Role Summary|Key Accountabilities|Qualifications and competencies|Key Responsibilities|Qualifications|About the Role|Job Requirements):?$/i.test(line)) {
       currentSec = { title: line.replace(/:$/, ''), paragraphs: [], subsections: [] }
       sections.push(currentSec)
@@ -554,15 +566,33 @@ function getStructuredJobSections(job) {
       currentSec.subsections.push(currentSub)
       continue
     }
+
+    const isIndentedBullet = /^(\s{2,}|\t+)[\u2022\u25E6\u2023\u2043\u2219\*\-]\s*(.*)$/.test(rawLine)
     const bulletMatch = line.match(/^[\u2022\u25E6\u2023\u2043\u2219\*\-]\s*(.*)$/)
-    if (bulletMatch) {
-      if (!currentSub) { currentSub = { title: '', bullets: [] }; currentSec.subsections.push(currentSub) }
-      currentSub.bullets.push(bulletMatch[1].trim())
+
+    if (isIndentedBullet && currentSub && currentSub.bullets && currentSub.bullets.length > 0) {
+      const parent = currentSub.bullets[currentSub.bullets.length - 1]
+      const childText = rawLine.replace(/^(\s{2,}|\t+)[\u2022\u25E6\u2023\u2043\u2219\*\-]\s*/, '').trim()
+      if (typeof parent === 'string') {
+        currentSub.bullets[currentSub.bullets.length - 1] = {
+          text: parent,
+          children: [childText]
+        }
+      } else {
+        if (!parent.children) parent.children = []
+        parent.children.push(childText)
+      }
       continue
     }
-    if (currentSub && currentSub.bullets.length === 0) currentSub.bullets.push(line)
+
+    if (bulletMatch) {
+      if (!currentSub) { currentSub = { title: '', bullets: [] }; currentSec.subsections.push(currentSub) }
+      currentSub.bullets.push({ text: bulletMatch[1].trim(), children: [] })
+      continue
+    }
+    if (currentSub && currentSub.bullets.length === 0) currentSub.bullets.push({ text: line, children: [] })
     else if (!currentSub || currentSec.subsections.length === 0) currentSec.paragraphs.push(line)
-    else currentSub.bullets.push(line)
+    else currentSub.bullets.push({ text: line, children: [] })
   }
   return sections
 }
